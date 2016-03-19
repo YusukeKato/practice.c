@@ -341,15 +341,17 @@ int story_1(void)
 				case 2:
 					printf( "\n %sは全力で逃げ出した。\n"
 							"\n 今まで生きてきた中で一番の本気を出した。\n"
+							,name
 							);
 					enterkey();
 					printf( "\n しかし、何かが恐るべき速度で追ってきている。\n");
 					enterkey();
-					printf( "\n ついに、%sは振り返ってしまった。\n");
+					printf( "\n ついに、%sは振り返ってしまった。\n",name);
 					enterkey();
 					printf( "\n そこで見たのは、口から火を吹くドラゴンだった。\n");
 					enterkey();
-					printf( "\n %sは、その火に飲まれ死んでしまった・・・・・・\n");
+					printf( "\n %sは、その火に飲まれ死んでしまった・・・・・・\n",name
+					);
 					enterkey();
 					exit(0);
 				default:
