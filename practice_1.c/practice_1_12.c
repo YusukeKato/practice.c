@@ -1,11 +1,14 @@
-/* practice_1_7.c */
+/* practice_1_12.c */
 /* YusukeKato */
-/* 2016.3.23 */
+/* 2016.3.29 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
+
+#define HP 100
+#define POWER 10
 
 void enterkey(void);
 void ste(void);
@@ -32,6 +35,7 @@ void shop(void);
 void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
+void mini_game_1(void);
 
 static char key;
 /*  */
@@ -58,13 +62,15 @@ static int nakama_1 = 0, nakama_2 = 0, nakama_3 = 0, nakama_4 = 0, nakama_5 = 0;
 static int flag_1_1 = 0, flag_1_2 = 0, flag_1_3 = 0, flag_1_4 = 0;
 static int flag_2_1 = 0, flag_2_2 = 0, flag_2_3 = 0, flag_2_4 = 0;
 static int flag_3_1 = 0, flag_3_2 = 0, flag_3_3 = 0, flag_3_4 = 0;
+static int flag_6_2 = 0;
+static int flag_7_1 = 0, flag_7_2 = 0, flag_7_3 = 0, flag_7_4 = 0;
 
 int main(void)
 {
 	start();
 	make_char();
 	pro();
-	while(flag!=13||flag!=14||flag!=15||flag!=16||flag!=17){
+	for(;;){
 		switch(flag){
 			case 1:
 				flag = story_1();//始め、村
@@ -102,13 +108,26 @@ int main(void)
 			case 12:
 				flag = story_12();//魔王城
 				break;
+			case 13:
+				end(13);
+				break;
+			case 14:
+				end(14);
+				break;
+			case 15:
+				end(15);
+				break;
+			case 16:
+				end(16);
+				break;
+			case 17:
+				end(17);
+				break;
 			default:
 				printf("\n 終了・・・・・・\n");
 				exit(0);
 		}
 	}
-	end(flag);
-	return 0;
 }
 
 /* 始め */
@@ -249,6 +268,17 @@ int story_1(void)
 	/* sele2(終) */
 	
 	menu();//メニュー
+	
+	printf( "\n 村長が会いに来てくれた\n"
+			);
+	enterkey();
+	printf( "\n 若い村長「この剣を持っていきな」\n"
+			"\n 若い村長「この剣は倒した敵の力を吸収できる！！」\n"
+			);
+	enterkey();
+	printf( "\n ”すごい剣”を手に入れた！！\n"
+			);
+	enterkey();
 	
 	/* sele3(始) */ 
 	printf( "\n 生まれ育った村に別れを告げ、\n"
@@ -516,7 +546,7 @@ int story_2(void)
 		case 1:
 			srand((unsigned)time(NULL));
 			ran_1 = rand()%2 + 1;
-			printf( "\n ナニカオコルダケを食べた\n"
+			printf( "\n ”ナニカオコルダケ”を食べた\n"
 					);
 			enterkey();
 			srand((unsigned)time(NULL));
@@ -683,21 +713,17 @@ int story_2(void)
 			flag_2_4 = 4;
 			break;
 		case 3:
-			printf( "\n 右の橋を渡る\n");
-			enterkey();
-			printf( "\n 橋を渡り切ると、声をかけられた\n"
+			printf( "\n 右の橋を渡る\n"
 					);
 			enterkey();
-			printf( "\n 優しい泥棒「初めまして」\n"
-					"\n 優しい泥棒「あなたたちが来るのを待ってました\n"
+			printf( "\n 橋を渡り切る\n"
 					);
 			enterkey();
-			printf( "\n 優しい泥棒が仲間になった\n"
+			printf( "\n その道は街に続くようだ・・・・・・\n"
 					);
-			nakama_2 = 1;
+			enterkey();
 			flag_2_4 = 5;
-			story = 5;
-			return story;
+			return 5;
 		default:
 			printf("\n 終了・・・・・・\n");
 			exit(0);
@@ -1097,6 +1123,8 @@ int story_3(void)
 int story_4(void)
 {
 	int sele;
+	int ran_1;
+	int sele_1,sele_2,sele_3;
 	
 	save_write();
 	
@@ -1106,26 +1134,610 @@ int story_4(void)
 	enterkey();
 	
 	/* sele1(始) */
-	printf( "\n \n"
+	printf( "\n 洞窟に入った\n"
 			);
 	enterkey();
-	printf( "\n \n"
+	if(nakama_1==1){
+		printf( "\n ごつい旅人「どこに魔物が潜んでいるか分からない」\n"
+				"\n ごつい旅人「気を付けろ」\n"
+				);
+		enterkey();
+	}
+	printf( "\n 洞窟の中は真っ暗で、\n"
+			"\n 手に持っている松明だけが頼りだ\n"
+			);
+	enterkey();
+	printf( "\n 甲高い鳴き声が聞こえる\n"
+			);
+	enterkey();
+	printf( "\n 何かがぶつかってきた！！\n"
+			);
+	enterkey();
+	printf( "\n ５のダメージ！！\n"
+			);
+	hp -= 5;
+	if(hp<=0){
+		printf( "\n %sは死んでしまった・・・・・・\n",name
+				);
+		exit(0);
+	}
+	battle(13);
+	ste();
+	enterkey();
+	/* sele1(終) */
+	
+	/* sele2(始) */
+	printf( "\n 洞窟を進んでいく\n"
+			);
+	enterkey();
+	printf( "\n ”ナニカオコルダケ”を見つけた！！\n"
+			);
+	enterkey();
+	printf( "\n どっちを食べる？\n"
+			"\n 1.赤いキノコ\n"
+			"\n 2.青いキノコ\n"
+			"\n 3.食べない\n"
 			);
 	printf("\n 入力：");
 	scanf("%d",&sele);
 	enterkey();
 	switch(sele){
 		case 1:
-			printf( "\n \n"
+			srand((unsigned)time(NULL));
+			ran_1 = rand()%30 + 1;
+			printf( "\n 力が%d上がった！！\n",ran_1
 					);
+			power += 30;
 			enterkey();
 			flag = 1;
 			break;
 		case 2:
-			printf( "\n \n"
+			srand((unsigned)time(NULL));
+			ran_1 = rand()%50 + 1;
+			printf( "\n 体力が%d上がった！！\n",ran_1
+					);
+			hp += ran_1;
+			enterkey();
+			flag = 2;
+			break;
+		case 3:
+			printf( "\n 食べずに終わった・・・・・・\n"
+					);
+			break;
+		default:
+			printf("\n 終了・・・・・・\n");
+			exit(0);
+	}
+	ste();
+	enterkey();
+	/* sele2(終) */
+	
+	/* sele3(始) */
+	printf( "\n 洞窟をさらに進む\n"
+			);
+	enterkey();
+	printf( "\n 開けた場所に出た\n"
+			"\n 不気味な扉が４つある\n"
+			);
+	enterkey();
+	printf( "\n レバーが２つあり、\n"
+			"\n それぞれ左右どちらかに倒せる\n"
+			);
+	enterkey();
+	printf( "\n １つ目のレバー\n"
+			"\n 1.左\n"
+			"\n 2.右\n"
+			);
+	printf("\n 入力：");
+	scanf("%d",&sele_1);
+	system("cls");
+	printf( "\n ２つ目のレバー\n"
+			"\n 1.左\n"
+			"\n 2.右\n"
+			);
+	printf("\n 入力：");
+	scanf("%d",&sele_2);
+	system("cls");
+	if(sele_1==0&&sele_2==0){
+		printf( "\n １の扉が開いた・・・・・・\n"
+				);
+		enterkey();
+		printf( "\n 薬草を見つけた！！\n"
+				"\n 体力が６０増えた！！\n"
+				);
+		hp += 60;
+		enterkey();
+	} else if(sele_1==1&&sele_2==0){
+		printf( "\n ２の扉が開いた・・・・・・\n"
+				);
+		enterkey();
+		printf( "\n パワーを見つけた！！\n"
+				"\n 力が２０上がった！！\n"
+				);
+		power += 20;
+		enterkey();
+	} else if(sele_1==0&&sele_2==1){
+		printf( "\n ３の扉が開いた・・・・・・\n"
+				);
+		enterkey();
+		battle(14);
+	} else if(sele_1==1&&sele_2==1){
+		printf( "\n ４の扉が開いた・・・・・・\n"
+				);
+		enterkey();
+		printf( "\n まぶしい光に思わず目をつぶった！\n"
+				);
+		enterkey();
+		printf( "\n そこは出口だった！！\n"
+				);
+		enterkey();
+		return 5;
+	} else {
+		printf( "\n 終了・・・・・・\n"
+				);
+		exit(0);
+	}
+		ste();
+	enterkey();
+	/* sele3(終) */
+	
+	/* sele4(始) */
+	printf( "\n 洞窟の中をさらに進んでいく\n"
+			);
+	enterkey();
+	printf( "\n 大きく不気味な扉にぶつかった\n"
+			"\n ただならぬ気配を感じる・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n 巨大な扉を押すとそれは簡単に開いた\n"
+			);
+	enterkey();
+	printf( "\n 扉の中に入る\n"
+			);
+	enterkey();
+	printf( "\n そこには何かがいた\n"
+			);
+	enterkey();
+	battle(15);
+	printf( "\n 洞窟を抜けた・・・・・・\n"
+			);
+	enterkey();
+	ste();
+	enterkey();
+	/* sele4(終) */
+	
+	return 0;
+}
+
+/* 物語５（泥棒、盗賊、怪盗） */
+int story_5(void)
+{
+	int sele;
+	int loop = 1;
+	int t_1=0,t_2=0,t_4=0,t_5=0;
+	
+	save_write();
+	
+	printf( "\n 五章\n"
+			"\n 怪盗参上\n"
+			);
+	enterkey();
+	
+	/* sele1(始) */
+	printf( "\n 街に着いた。そこは活気あふれる豊かな街！！\n"
+			);
+	enterkey();
+	menu();
+	ste();
+	enterkey();
+	/* sele1(終) */
+	
+	/* sele2(始) */
+	printf( "\n 街を歩いていると、なにやら騒がしい\n"
+			);
+	enterkey();
+	printf( "\n どうやら貴族の家に泥棒が入ったようだ\n"
+			);
+	enterkey();
+	menu();
+	ste();
+	enterkey();
+	/* sele2(終) */
+	
+	/* sele3(始) */
+	printf( "\n 路地裏が騒がしい\n"
+			);
+	enterkey();
+	printf( "\n 見てみると、誰かが兵士に囲まれている・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n 助ける？\n"
+			"\n 1.もちろん助ける\n"
+			"\n 2.関わりたくない\n"
+			);
+	printf("\n 入力：");
+	scanf("%d",&sele);
+	enterkey();
+	switch(sele){
+		case 1:
+			battle(16);
+			printf( "\n 優しい泥棒「助けていただきありがとうございます」\n"
+					);
+			enterkey();
+			printf( "\n 優しい泥棒「仲間にしてください」\n"
+					);
+			nakama_2 = 1;
+			flag = 1;
+			break;
+		case 2:
+			printf( "\n 見なかったことにした\n"
+					);
+			enterkey();
+			printf( "\n 次の街を目指す\n"
 					);
 			enterkey();
 			flag = 2;
+			return 6;
+		default:
+			printf("\n 終了・・・・・・\n");
+			exit(0);
+	}
+	ste();
+	enterkey();
+	/* sele3(終) */
+	
+	/* sele4(始) */
+	printf( "\n 優しい泥棒「この街に悪い貴族がいます」\n"
+			"\n 優しい泥棒「私はそいつを懲らしめたい」\n"
+			"\n 優しい泥棒「力を貸してください」\n"
+			);
+	enterkey();
+	printf( "\n %sは頷いた\n",name
+			);
+	enterkey();
+	menu();
+	ste();
+	enterkey();
+	/* sele4(終) */
+	
+	/* sele5(始) */
+	printf( "\n 悪い貴族の屋敷へしのびこむ\n"
+			"\n 目的は悪事の証拠だ\n"
+			);
+	enterkey();
+	while(loop!=0){
+		printf( "\n 扉が５つある・・・・・・\n"
+				"\n どれ？\n"
+				"\n 1.赤い扉\n"
+				"\n 2.白い扉\n"
+				"\n 3.黒い扉\n"
+				"\n 4.青い扉\n"
+				"\n 5.湿った扉\n"
+				);
+		printf( "\n 入力："
+				);
+		scanf("%d",&sele);
+		switch(sele){
+			case 1:
+				t_1 += 1;
+				if(t_1==1){
+					printf( "\n 赤い扉を開ける・・・・・・\n"
+							);
+					enterkey();
+					battle(16);
+					printf( "\n この部屋には何もない・・・・・・\n"
+							);
+					enterkey();
+				} else {
+					printf( "\n その扉はもう開けた\n"
+							);
+					enterkey();
+				}
+				break;
+			case 2:
+				t_2 += 1;
+				if(t_2==1){
+					printf( "\n 白い扉を開ける・・・・・・\n"
+							);
+					enterkey();
+					printf( "\n 薬草を見つけた！！\n"
+							"\n 体力が５０回復した！！\n"
+							);
+					hp += 50;
+					enterkey();
+				} else {
+					printf( "\n その扉はもう開けた\n"
+							);
+					enterkey();
+				}
+				break;
+			case 3:
+				printf( "\n 黒い扉を開けた・・・・・・\n"
+						);
+				enterkey();
+				battle(17);
+				printf( "\n 部屋の中を探す・・・・・・\n"
+						"\n 悪事の証拠を見つけた！！\n"
+						);
+				enterkey();
+				printf( "\n 優しい泥棒「これでこの街は救われる！！」\n"
+						"\n 優しい泥棒「ありがとうございました！！」\n"
+						);
+				enterkey();
+				loop = 0;
+				break;
+			case 4:
+				t_4 += 1;
+				if(t_4==1){
+					printf( "\n 青い扉を開けた・・・・・・\n"
+							);
+					enterkey();
+					battle(16);
+					printf( "\n この部屋には何もない・・・・・・\n"
+							);
+					enterkey();
+				} else {
+					printf( "\n その扉はもう開けた\n"
+							);
+					enterkey();
+				}
+				break;
+			case 5:
+				t_5 += 1;
+				if(t_5==1){
+					printf( "\n 青い扉を開けた・・・・・・\n"
+							);
+					enterkey();
+					printf( "\n 薬草を見つけた！！\n"
+							"\n 体力が５０回復した！！\n"
+							);
+					hp += 50;
+					enterkey();
+				} else {
+					printf( "\n その扉はもう開けた\n"
+							);
+					enterkey();
+				}
+				break;
+			default:
+				exit(0);
+		}
+	}
+	ste();
+	enterkey();
+	/* sele5(終) */
+	
+	printf( "\n 問題は解決した\n"
+			);
+	enterkey();
+	printf( "\n 次の街へ向かう\n"
+			);
+	enterkey();
+	
+	return 6;
+}
+
+/* 物語６（街） */
+int story_6(void)
+{
+	int sele;
+	
+	save_write();
+	
+	printf( "\n 六章\n"
+			"\n 賑やかな街\n"
+			);
+	enterkey();
+	
+	/* sele1(始) */
+	printf( "\n 大きな街に着いた\n"
+			"\n 中心には王様が住む城がある\n"
+			);
+	enterkey();
+	printf( "\n ひとまず疲れを癒すため宿に泊まった\n"
+			);
+	enterkey();
+	printf( "\n 体力が５０回復した！！\n"
+			);
+	enterkey();
+	menu();
+	ste();
+	enterkey();
+	/* sele1(終) */
+	
+	/* sele2(始) */
+	printf( "\n 街の中を散歩する\n"
+			);
+	enterkey();
+	printf( "\n 突然、城壁が吹っ飛んだ\n"
+			"\n さらに火の手があがり始める\n"
+			);
+	enterkey();
+	printf( "\n 魔王軍が攻め込んできた！！\n"
+			"\n 街にいる兵士や戦えるものが街を守るため\n"
+			"\n 魔王軍に向かって突っ込んでいく\n"
+			);
+	enterkey();
+	printf( "\n 街のために闘う？\n"
+			"\n 1.当たり前だ！！\n"
+			"\n 2.いや、やめておこう\n"
+			);
+	enterkey();
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n 魔王軍に攻め込む\n"
+					);
+			enterkey();
+			battle(18);
+			flag_6_2 = 1;
+			break;
+		case 2:
+			printf( "\n この街を出ようと出口へ向かう\n"
+					);
+			enterkey();
+			printf( "\n 紫の魔女「どこへ行くの？」\n"
+					"\n 突如現れた、紫の魔女が道をふさいだ\n"
+					);
+			enterkey();
+			printf( "\n 紫の魔女「みんなで闘うわよ！！」\n"
+					);
+			enterkey();
+			printf( "\n 紫の魔女が仲間になった！！\n"
+					);
+			nakama_3 = 1;
+			enterkey();
+			flag_6_2 = 2;
+			break;
+		default:
+			printf( "\n 終了・・・・・・\n"
+					);
+			exit(0);
+	}
+	ste();
+	enterkey();
+	/* sele2(終) */
+	
+	/* sele3(始) */
+	printf( "\n 近くにいた人が薬草をくれた！！\n"
+			"\n 体力が１００回復した！！\n"
+			);
+	hp += 100;
+	enterkey();
+	printf( "\n さらに魔王軍に突っ込む\n"
+			);
+	enterkey();
+	battle(19);
+	enterkey();
+	/* sele3(終) */
+	
+	/* sele4(始) */
+	printf( "\n 近くにいたコックさんが\n"
+			"\n おいしい料理をごちそうしてくれた！！\n"
+			);
+	enterkey();
+	printf( "\n 体力が３００回復した！！\n"
+			);
+	hp += 300;
+	enterkey();
+	printf( "\n 魔王軍に突っ込む！！\n"
+			);
+	enterkey();
+	battle(20);
+	enterkey();
+	/* sele4(終) */
+	
+	/* sele5(始) */
+	printf( "\n ほとんどの魔王軍を蹴散らした！！\n"
+			);
+	enterkey();
+	if(nakama_3 == 1){
+		printf( "\n 紫の魔女「結構倒したわね」\n"
+				"\n 紫の魔女「もう一息よ」\n"
+				);
+		enterkey();
+	}
+		printf( "\n 魔王軍の幹部「ここまでやられてしまうとはな」\n"
+				"\n 魔王軍の幹部「最後は私が闘おう」\n"
+				);
+		enterkey();
+		battle(21);
+		enterkey();
+	/* sele5(終) */
+	
+	printf( "\n 魔王軍との戦いは終わった・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n 報酬として１００００円もらった！！\n"
+			);
+	money += 10000;
+	enterkey();
+	
+	menu();
+	
+	if(nakama_3==1){
+		printf( "\n 紫の魔女「この街での用事も済んだし行きましょう」\n"
+				);
+		enterkey();
+		return 7;
+	}
+	
+	printf( "\n この街を出た\n"
+			);
+	enterkey();
+	printf( "\n 極寒の地へ向かう・・・・・・\n"
+			);
+	enterkey();
+	ste();
+	enterkey();
+	return 8;
+}
+
+/* 物語７（魔法使い） */
+int story_7(void)
+{
+	int sele;
+	
+	save_write();
+	
+	printf( "\n 七章\n"
+			"\n 旅する魔女\n"
+			);
+	enterkey();
+	
+	/* sele1(始) */
+	printf( "\n 紫の魔女と共に旅をする\n"
+			);
+	enterkey();
+	printf( "\n 紫の魔女「私はある魔女を探しているの」\n"
+			);
+	enterkey();
+	printf( "\n 紫の魔女「あいつを見つけなきゃいけない」\n"
+			);
+	enterkey();
+	printf( "\n とある村で黒い魔女について聞きこむことにした\n"
+			);
+	enterkey();
+	printf( "\n 村人A「黒い魔女？ここから北にある村で見かけたぞ」\n"
+			"\n 村人B「いや、そんなはずはない。南の村にいるはずだ」\n"
+			"\n 村人C「東の村にいる。そんな気がするんだ・・・・・・」\n"
+			"\n 村人D「この棒が倒れた方向にいる・・・・・・西だ！！」\n"
+			);
+	enterkey();
+	printf( "\n どこに行く？\n"
+			"\n 1.北の村\n"
+			"\n 2.南の村\n"
+			"\n 3.東の村\n"
+			"\n 4.西の村\n"
+			);
+	printf("\n 入力：");
+	scanf("%d",&sele);
+	enterkey();
+	switch(sele){
+		case 1:
+			printf( "\n 北の村に着いた\n"
+					);
+			enterkey();
+			flag_7_1 = 1;
+			break;
+		case 2:
+			printf( "\n 南の村に着いた\n"
+					);
+			enterkey();
+			flag_7_2 = 1;
+			break;
+		case 3:
+			printf( "\n 東の村に着いた\n"
+					);
+			enterkey();
+			flag_7_3 = 1;
+			break;
+		case 4:
+			printf( "\n 西の村に着いた\n"
+					);
+			enterkey();
+			flag_7_4 = 1;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -1134,45 +1746,6 @@ int story_4(void)
 	ste();
 	enterkey();
 	/* sele1(終) */
-	
-	return 0;
-}
-
-/* 物語５（泥棒、盗賊、怪盗） */
-int story_5(void)
-{
-	save_write();
-	
-	printf( "\n 五章\n"
-			"\n 怪盗参上\n"
-			);
-	enterkey();
-	
-	return 0;
-}
-
-/* 物語６（街） */
-int story_6(void)
-{
-	save_write();
-	
-	printf( "\n 六章\n"
-			"\n 賑やかな街\n"
-			);
-	enterkey();
-	
-	return 0;
-}
-
-/* 物語７（魔法使い） */
-int story_7(void)
-{
-	save_write();
-	
-	printf( "\n 七章\n"
-			"\n 旅する魔女\n"
-			);
-	enterkey();
 	
 	return 0;
 }
@@ -1357,6 +1930,60 @@ int battle(int ene)
 			ene_power = 20;
 			ene_money = 1500;
 			break;
+		case 13:
+			strncpy(ene_name,"こう もりお",sizeof(ene_name));
+			ene_hp = 200;
+			ene_power = 10;
+			ene_money = 200;
+			break;
+		case 14:
+			strncpy(ene_name,"黄の龍",sizeof(ene_name));
+			ene_hp = 300;
+			ene_power = 20;
+			ene_money = 2000;
+			break;
+		case 15:
+			strncpy(ene_name,"何か",sizeof(ene_name));
+			ene_hp = 300;
+			ene_power = 20;
+			ene_money = 3000;
+			break;
+		case 16:
+			strncpy(ene_name,"兵士",sizeof(ene_name));
+			ene_hp = 200;
+			ene_power = 30;
+			ene_money = 2000;
+			break;
+		case 17:
+			strncpy(ene_name,"屋敷の番人",sizeof(ene_name));
+			ene_hp = 500;
+			ene_power = 50;
+			ene_money = 3000;
+			break;
+		case 18:
+			strncpy(ene_name,"魔王軍の下っ端",sizeof(ene_name));
+			ene_hp = 600;
+			ene_power = 30;
+			ene_money = 2000;
+			break;
+		case 19:
+			strncpy(ene_name,"魔王軍の掃除係",sizeof(ene_name));
+			ene_hp = 600;
+			ene_power = 50;
+			ene_money = 3000;
+			break;
+		case 20:
+			strncpy(ene_name,"魔王軍の若手",sizeof(ene_name));
+			ene_hp = 600;
+			ene_power = 60;
+			ene_money = 3000;
+			break;
+		case 21:
+			strncpy(ene_name,"魔王軍のまとめ役",sizeof(ene_name));
+			ene_hp = 600;
+			ene_power = 60;
+			ene_money = 5000;
+			break;
 		default:
 			exit(0);
 	}
@@ -1447,8 +2074,8 @@ void make_char(void)
 					"\n 入力："
 					);
 			scanf("%s",name);
-			hp = 50;
-			power = 10;
+			hp = HP;
+			power = POWER;
 			flag = 1;
 			save_write();
 			break;
@@ -1470,7 +2097,7 @@ void enterkey(void)
 
 void ste(void)
 {
-printf("\n %s 体力：%d  力：%d  生き返る草：%d\n",name ,hp ,power,kusa);
+printf("\n %s 体力：%d  力：%d  お金： %d 生き返る草：%d\n",name ,hp ,power,money,kusa);
 if(nakama_1==1)
 	printf("\n %s 体力：%d  力：%d\n",name_1, hp_1, power_1);
 if(nakama_2==1)
@@ -1487,7 +2114,10 @@ void save_write(void)
 {
 	FILE *fp;
 	fp = fopen("practice_data.txt","w");
+	fprintf(fp,"%s\n",name);
+	/*
 	fprintf(fp,"%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",name,hp,power,money,flag,kusa,nakama_1,nakama_2,nakama_3,nakama_4,nakama_5,power_1,power_2,power_3,power_4,power_5);
+	*/
 	fclose(fp);
 }
 
@@ -1495,14 +2125,9 @@ void save_read(void)
 {
 	FILE *fp;
 	fp = fopen("practice_data.txt","r");
-	fscanf(fp,"%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",name,&hp,&power,&money,&flag,&kusa,&nakama_1,&nakama_2,&nakama_3,&nakama_4,&nakama_5,&power_1,&power_2,&power_3,&power_4,&power_5);
-	
-		printf( "\n 名前： %s\n"
-				"\n 体力： %d\n"
-				"\n 力  ： %d\n"
-				"\n お金： %d\n"
-				"\n 章  ： %d\n"
-				,name,hp,power,money,flag);
+	fscanf(fp,"%s",name);
+	printf( "\n 名前： %s\n"
+				,name);
 	fclose(fp);
 }
 
@@ -1512,13 +2137,15 @@ void menu(void)
 	int loop = 1;
 	
 	while(loop!=0){
+		ste();
+		enterkey();
 		printf( "\n==============================\n"
 				" 選択してください\n"
 				" 1.戦闘\n"
-				" 2.ストーリー\n"
+				" 2.ストーリーへ\n"
 				" 3.お店\n"
 				" 4.宿\n"
-				" 5.終了\n"
+				" 5.ゲーム終了（注意：セーブなし）\n"
 				"==============================\n"
 				);
 		printf( "\n 入力：");
@@ -1633,6 +2260,12 @@ void ikikaeru(void)
 			enterkey();
 		}
 	}
+}
+
+void mini_game_1(void)
+{
+	printf( "\n \n"
+			);
 }
 		
 
