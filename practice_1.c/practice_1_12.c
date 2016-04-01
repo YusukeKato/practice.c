@@ -1,6 +1,6 @@
 /* practice_1_12.c */
 /* YusukeKato */
-/* 2016.3.29 */
+/* 2016.4.1 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1704,44 +1704,54 @@ int story_7(void)
 			"\n 村人C「東の村にいる。そんな気がするんだ・・・・・・」\n"
 			"\n 村人D「この棒が倒れた方向にいる・・・・・・西だ！！」\n"
 			);
-	enterkey();
-	printf( "\n どこに行く？\n"
-			"\n 1.北の村\n"
-			"\n 2.南の村\n"
-			"\n 3.東の村\n"
-			"\n 4.西の村\n"
+	printf( "\n この村の人々は嘘をつかない・・・・・・\n"
 			);
-	printf("\n 入力：");
-	scanf("%d",&sele);
 	enterkey();
-	switch(sele){
-		case 1:
-			printf( "\n 北の村に着いた\n"
-					);
-			enterkey();
-			flag_7_1 = 1;
-			break;
-		case 2:
-			printf( "\n 南の村に着いた\n"
-					);
-			enterkey();
-			flag_7_2 = 1;
-			break;
-		case 3:
-			printf( "\n 東の村に着いた\n"
-					);
-			enterkey();
-			flag_7_3 = 1;
-			break;
-		case 4:
-			printf( "\n 西の村に着いた\n"
-					);
-			enterkey();
-			flag_7_4 = 1;
-			break;
-		default:
-			printf("\n 終了・・・・・・\n");
-			exit(0);
+	while(1){
+		printf( "\n どこに行く？\n"
+				"\n 1.北の村\n"
+				"\n 2.南の村\n"
+				"\n 3.東の村\n"
+				"\n 4.西の村\n"
+				);
+		printf("\n 入力：");
+		scanf("%d",&sele);
+		enterkey();
+		switch(sele){
+			case 1:
+				printf( "\n 北の村に着いた\n"
+						);
+				enterkey();
+				printf( "\n 村人E「黒い魔女？さっきまでいたけど」\n"
+						"\n 村人F「西の村にいったはずだ」\n"
+						"\n 村人G「俺は東に歩いていくのを見たよ」\n"
+						"\n 村人H「」\n"
+						);
+				menu();
+				flag_7_1 = 1;
+				break;
+			case 2:
+				printf( "\n 南の村に着いた\n"
+						);
+				enterkey();
+				flag_7_2 = 1;
+				break;
+			case 3:
+				printf( "\n 東の村に着いた\n"
+						);
+				enterkey();
+				flag_7_3 = 1;
+				break;
+			case 4:
+				printf( "\n 西の村に着いた\n"
+						);
+				enterkey();
+				flag_7_4 = 1;
+				break;
+			default:
+				printf("\n 終了・・・・・・\n");
+				exit(0);
+		}
 	}
 	ste();
 	enterkey();
@@ -1753,6 +1763,9 @@ int story_7(void)
 /* 物語８（雪国） */
 int story_8(void)
 {
+	int sele;
+	int i,j = -1;
+	
 	save_write();
 	
 	printf( "\n 八章\n"
@@ -1760,7 +1773,84 @@ int story_8(void)
 			);
 	enterkey();
 	
-	return 0;
+	/* sele1(始) */
+	printf( "\n 深く雪が積もる雪の国に着いた\n"
+			"\n どこを見ても真っ白だ\n"
+			);
+	enterkey();
+	menu();
+	/* sele1(終) */
+	
+	/* sele2(始) */
+	printf( "\n 雪の国からさらに北に行くと\n"
+			"\n 険しい雪山がある\n"
+			);
+	enterkey();
+	printf( "\n その雪山には恐ろしい魔物がうじゃうじゃいる\n"
+			);
+	enterkey();
+	printf( "\n その魔物が山から降りてきてこまっているらしい\n"
+			);
+	enterkey();
+	printf( "\n 険しい雪山へ向かう\n"
+			);
+	enterkey();
+	ste();
+	enterkey();
+	/* sele2(終) */
+	
+	/* sele3(始) */
+	for(i=22; i<=26; i++){
+		j += 2;
+		printf( "\n %d合目\n",j
+				);
+		battle(i);
+	}
+	/* sele3(終) */
+	
+	/* sele4(始) */
+	printf( "\n 山頂に着いた\n"
+			"\n ちょうど日が昇る\n"
+			"\n まぶしい\n"
+			);
+	enterkey();
+	printf( "\n その光とともに何かが現れる\n"
+			"\n それは龍だった\n"
+			"\n 体を覆う鱗が輝く\n"
+			);
+	enterkey();
+	battle(27);
+	/* sele4(終) */
+	
+	printf( "\n 金色の龍を仲間にしますか？\n"
+			"\n 1.仲間になる\n"
+			"\n 2.ほっとく\n"
+			);
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	
+	switch(sele){
+		case 1:
+			printf( "\n 金色の龍が仲間になった！！\n"
+					);
+			enterkey();
+			ste();
+			enterkey();
+			return 10;
+		case 2:
+			printf( "\n 雪山に朝がきた\n"
+					);
+			enterkey();
+			printf( "\n 用事は済んだ\n"
+					);
+			enterkey();
+			printf( "\n 旅は続く\n"
+					);
+			enterkey();
+			return 9;
+		default:
+			exit(0);
+	}
 }
 
 /* 物語９（海） */
@@ -1983,6 +2073,42 @@ int battle(int ene)
 			ene_hp = 600;
 			ene_power = 60;
 			ene_money = 5000;
+			break;
+		case 22:
+			strncpy(ene_name,"雪うさぎ",sizeof(ene_name));
+			ene_hp = 400;
+			ene_power = 40;
+			ene_money = 1000;
+			break;
+		case 23:
+			strncpy(ene_name,"雪おおかみ",sizeof(ene_name));
+			ene_hp = 500;
+			ene_power = 70;
+			ene_money = 2000;
+			break;
+		case 24:
+			strncpy(ene_name,"雪わに",sizeof(ene_name));
+			ene_hp = 800;
+			ene_power = 100;
+			ene_money = 3000;
+			break;
+		case 25:
+			strncpy(ene_name,"雪鬼",sizeof(ene_name));
+			ene_hp = 1000;
+			ene_power = 150;
+			ene_money = 5000;
+			break;
+		case 26:
+			strncpy(ene_name,"雪雪雪雪雪",sizeof(ene_name));
+			ene_hp = 1500;
+			ene_power = 100;
+			ene_money = 10000;
+			break;
+		case 27:
+			strncpy(ene_name,"金色の龍",sizeof(ene_name));
+			ene_hp = 2000;
+			ene_power = 200;
+			ene_money = 20000;
 			break;
 		default:
 			exit(0);
