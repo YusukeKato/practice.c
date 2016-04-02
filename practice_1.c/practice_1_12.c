@@ -1,6 +1,6 @@
 /* practice_1_12.c */
 /* YusukeKato */
-/* 2016.4.1 */
+/* 2016.4.2 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1856,12 +1856,61 @@ int story_8(void)
 /* 物語９（海） */
 int story_9(void)
 {
+	int sele;
+	
 	save_write();
 	
 	printf( "\n 九章\n"
 			"\n 船上の戦場 \n"
 			);
 	enterkey();
+	
+	/* sele1(始) */
+	printf( "\n 広い海を進む\n"
+			);
+	enterkey();
+	printf( "\n 遠くのほうに黒い霧がかかった島がある\n"
+			"\n 魔王城だ・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n しかし、前方に巨大なイカが現れた！！\n"
+			);
+	enterkey();
+	battle(28);
+	/* sele1(終) */
+	
+	/* sele2(始) */
+	printf( "\n 広い海を進む\n"
+			);
+	enterkey();
+	printf( "\n 魔王城へ向けて進んでいると、\n"
+			"\n 金色の龍が現れた\n"
+			);
+	enterkey();
+	printf( "\n 龍の背に乗りますか？\n"
+			"\n 1.乗る\n"
+			"\n 2.乗らない\n"
+			);
+	printf("\n 入力：");
+	scanf("%d",&sele);
+	enterkey();
+	switch(sele){
+		case 1:
+			printf( "\n 金色の龍の背に乗った\n"
+					);
+			enterkey();
+			return 10;
+		case 2:
+			printf( "\n 龍には悪いが魔王城へ向かう\n"
+					);
+			enterkey();
+		default:
+			printf("\n 終了・・・・・・\n");
+			exit(0);
+	}
+	ste();
+	enterkey();
+	/* sele2(終) */
 	
 	return 0;
 }
@@ -2109,6 +2158,12 @@ int battle(int ene)
 			ene_hp = 2000;
 			ene_power = 200;
 			ene_money = 20000;
+			break;
+		case 28:
+			strncpy(ene_name,"巨大なイカ",sizeof(ene_name));
+			ene_hp = 2000;
+			ene_power = 100;
+			ene_money = 15000;
 			break;
 		default:
 			exit(0);
