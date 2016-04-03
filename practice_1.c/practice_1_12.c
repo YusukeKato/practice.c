@@ -1,18 +1,30 @@
 /* practice_1_12.c */
 /* YusukeKato */
+/* 2016.3.18 */
 /* 2016.4.3 */
-/* １．整理 */
-/* ２．調整 */
-/* ３．追加 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <windows.h>
 
-#define HP 100
-#define POWER 10
+/* 主人公 */
+enum hero{
+	HP = 100,
+	POWER = 10,
+	MONEY = 1000,
+	KUSA = 0
+};
 
+/* 宿 */
+enum yado{
+	YADO_1 = 20,
+	YADO_2 = 100,
+	YADO_3 = 300,
+	YADO_4 = 2000
+};
+
+/* プロトタイプ宣言 */
 void enterkey(void);
 void ste(void);
 void save_write(void);
@@ -38,32 +50,31 @@ void shop(void);
 void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
-void mini_game_1(void);
 
+/* エンターキーのため */
 static char key;
-/*  */
+/* 主人公 */
 static char name[100];
-static int hp = 100,power = 10,money = 1000,kusa = 0;
-/*  */
-static char name_1[100];
-static int hp_1 = 80, power_1 = 10;
-static char name_2[100];
-static int hp_2 = 50, power_2 = 5;
-static char name_3[100];
-static int hp_3 = 40, power_3 = 10;
-static char name_4[100];
-static int hp_4 = 150, power_4 = 20;
-static char name_5[100];
-static int hp_5 = 120, power_5 = 50;
-/*  */
+static int hp,power,money,kusa;
+/* 仲間 */
+static char name_1[100] = "ごつい旅人";
+static int hp_1, power_1;
+static char name_2[100] = "優しい泥棒";
+static int hp_2, power_2;
+static char name_3[100] = "紫の魔女";
+static int hp_3, power_3;
+static char name_4[100] = "龍";
+static int hp_4, power_4;
+static char name_5[100] = "湖の精霊";
+static int hp_5, power_5;
+/* 敵 */
 static char ene_name[100];
-static int ene_hp = 50, ene_power = 5,ene_money = 10;
-/*  */
+static int ene_hp = 0, ene_power = 0,ene_money = 0;
+/* フラグ */
 static int flag = 1, flag_end = 0;
+/* 仲間のフラグ */
 static int nakama_1 = 0, nakama_2 = 0, nakama_3 = 0, nakama_4 = 0, nakama_5 = 0;
 /* 選択の記録 */
-static int flag_1_1 = 0, flag_1_2 = 0, flag_1_3 = 0, flag_1_4 = 0;
-static int flag_2_1 = 0, flag_2_2 = 0, flag_2_3 = 0, flag_2_4 = 0;
 static int flag_3_1 = 0, flag_3_2 = 0, flag_3_3 = 0, flag_3_4 = 0;
 static int flag_6_2 = 0;
 static int flag_7_1 = 0, flag_7_2 = 0, flag_7_3 = 0, flag_7_4 = 0;
@@ -73,7 +84,7 @@ int main(void)
 	start();
 	make_char();
 	pro();
-	for(;;){
+	while(flag!=99){
 		switch(flag){
 			case 1:
 				flag = story_1();//始め、村
@@ -112,25 +123,26 @@ int main(void)
 				flag = story_12();//魔王城
 				break;
 			case 13:
-				end(13);
+				flag = end(13);
 				break;
 			case 14:
-				end(14);
+				flag = end(14);
 				break;
 			case 15:
-				end(15);
+				flag = end(15);
 				break;
 			case 16:
-				end(16);
+				flag = end(16);
 				break;
 			case 17:
-				end(17);
+				flag = end(17);
 				break;
 			default:
 				printf("\n 終了・・・・・・\n");
 				exit(0);
 		}
 	}
+	return 0;
 }
 
 /* 始め */
@@ -144,6 +156,7 @@ void start(void)
 /* プロローグ */
 void pro(void)
 {
+	enterkey();
 	printf( "\n 今から千年前、伝説の勇者は\n"
 			"\n 恐ろしき魔王とその手下たちを滅ぼす。\n"
 			);
@@ -196,7 +209,6 @@ int story_1(void)
 					,name
 					);
 			hp -= 5;
-			flag_1_1 = 1;
 			break;
 		case 2:
 			printf( "\n やっぱり、朝ご飯を抜くと力が出ないなぁ。\n"
@@ -205,7 +217,6 @@ int story_1(void)
 			enterkey();
 			printf("\n %sの力が２下がった・・・・・・\n",name);
 			power -= 2;
-			flag_1_1 = 2;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -242,7 +253,6 @@ int story_1(void)
 					"\n １０のダメージ！！\n"
 					);
 			hp -= 10;
-			flag_1_2 = 1;
 			break;
 		case 2:
 			printf( "\n とても頑丈そうな鉄の盾、\n"
@@ -250,7 +260,6 @@ int story_1(void)
 					);
 			printf("\n %sの力が３上がった！！\n",name);
 			power += 3;
-			flag_1_2 = 2;
 			break;
 		case 3:
 			printf( "\n 薬草は必需品だ。\n"
@@ -259,7 +268,6 @@ int story_1(void)
 			enterkey();
 			printf("\n %sの体力が１２増えた！！\n",name);
 			hp += 12;
-			flag_1_2 = 3;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -306,15 +314,12 @@ int story_1(void)
 	switch(sele){
 		case 1:
 			battle(1);
-			flag_1_3 = 1;
 			break;
 		case 2:
 			battle(2);
-			flag_1_3 = 2;
 			break;
 		case 3:
 			battle(3);
-			flag_1_3 = 3;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -359,7 +364,6 @@ int story_1(void)
 					enterkey();
 					printf( "\n 力が１０上がった！！\n");
 					power += 10;
-					flag_1_4 = 1;
 					story = 3;
 					break;
 				case 2:
@@ -376,8 +380,6 @@ int story_1(void)
 							);
 					enterkey();
 					printf( "\n 紫の魔女が仲間になった。\n");
-					strncpy(name_3,"紫の魔女",sizeof(name_3));
-					flag_1_4 = 2;
 					nakama_3 = 1;
 					story = 7;
 					break;
@@ -388,7 +390,6 @@ int story_1(void)
 					enterkey();
 					printf( "\n 体力が３０増えた！！\n");
 					hp += 30;
-					flag_1_4 = 3;
 					story = 3;
 					break;
 				default:
@@ -407,8 +408,6 @@ int story_1(void)
 					);
 			enterkey();
 			printf("\n ごつい旅人が仲間になった。\n");
-			strncpy(name_1,"ごつい旅人",sizeof(name_1));
-			flag_1_4 = 4;
 			nakama_1 = 1;
 			story = 2;
 			break;
@@ -434,9 +433,7 @@ int story_1(void)
 					printf("\n 倒した赤い龍が起き上がってきた。\n");
 					enterkey();
 					printf("\n 赤い龍が仲間になった。\n");
-					strncpy(name_4,"赤い龍",sizeof(name_4));
 					nakama_4 = 1;
-					flag_1_4 = 5;
 					story = 10;
 					break;
 				case 2:
@@ -454,7 +451,6 @@ int story_1(void)
 					printf( "\n %sは、その火に飲まれ死んでしまった・・・・・・\n",name
 					);
 					enterkey();
-					flag_1_4 = 6;
 					exit(0);
 				default:
 					exit(0);
@@ -510,8 +506,7 @@ int story_2(void)
 					"\n 体力が３０回復した！！\n"
 					);
 			hp += 30;
-			enterkey();
-			flag_2_1 = 1;
+			enterkey();;
 			break;
 		case 2:
 			printf( "\n パワーを使った！！\n"
@@ -519,7 +514,6 @@ int story_2(void)
 					);
 			power += 10;
 			enterkey();
-			flag_2_1 = 2;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -574,7 +568,6 @@ int story_2(void)
 				power_1 += ran_2;
 			}
 			enterkey();
-			flag_2_2 = 1;
 			break;
 		case 2:
 			printf( "\n ごつい旅人「そんなこと言わずに食べてみろよ」\n"
@@ -586,7 +579,6 @@ int story_2(void)
 			power += 5;
 			hp_1 += 10;
 			power_1 += 5;
-			flag_2_2 = 2;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -620,13 +612,11 @@ int story_2(void)
 					);
 			enterkey();
 			battle(5);
-			flag_2_3 = 1;
 			break;
 		case 2:
 			printf( "\n 何とか逃げ切った・・・・・・\n"
 					);
 			enterkey();
-			flag_2_3 = 2;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -673,7 +663,6 @@ int story_2(void)
 					printf( "\n ここで迎え撃つ！！！\n");
 					enterkey();
 					battle(6);
-					flag_2_4 = 1;
 					break;
 				case 2:
 					printf( "\n 橋を渡りきるため走った！！\n");
@@ -681,7 +670,6 @@ int story_2(void)
 					printf( "\n しかし、それよりも早く敵が迫ってきた！！\n");
 					enterkey();
 					battle(7);
-					flag_2_4 = 2;
 					break;
 				case 3:
 					printf( "\n 橋から飛び降りた！！\n");
@@ -698,7 +686,6 @@ int story_2(void)
 							"\n 体力が３０増えた！！\n"
 							);
 					hp += 30;
-					flag_2_4 = 3;
 					break;
 				default:
 					printf(" \n 終了・・・・・・\n");
@@ -713,7 +700,6 @@ int story_2(void)
 					);
 			enterkey();
 			battle(7);
-			flag_2_4 = 4;
 			break;
 		case 3:
 			printf( "\n 右の橋を渡る\n"
@@ -725,7 +711,6 @@ int story_2(void)
 			printf( "\n その道は街に続くようだ・・・・・・\n"
 					);
 			enterkey();
-			flag_2_4 = 5;
 			return 5;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -821,8 +806,8 @@ int story_3(void)
 					"\n 体力が３０増えた！！\n"
 					);
 			hp += 30;
-			enterkey();
 			flag_3_2 = 1;
+			enterkey();
 			break;
 		case 2:
 			printf( "\n 左の曲がりくねった道を進む\n"
@@ -955,7 +940,6 @@ int story_3(void)
 				case 1:
 					printf("\n なんとかよけ切った！！\n");
 					enterkey();
-					flag_3_3 = 1;
 					break;
 				case 2:
 					printf( "\n 足をつぶされた！！\n"
@@ -963,7 +947,6 @@ int story_3(void)
 							);
 					hp += 20;
 					enterkey();
-					flag_3_3 = 2;
 					break;
 				case 3:
 					printf( "\n 受け止めてみせる！！\n");
@@ -978,7 +961,6 @@ int story_3(void)
 								"\n ２０のダメージ！！\n");
 						enterkey();
 					}
-					flag_3_3 = 3;
 					break;
 				default:
 					break;
@@ -997,7 +979,6 @@ int story_3(void)
 					);
 			hp += 30;
 			enterkey();
-			flag_3_3 = 4;
 			break;
 		case 3:
 			enterkey();
@@ -1020,7 +1001,6 @@ int story_3(void)
 			printf( "\n 紫の魔女が仲間になった！！！\n"
 					);
 			nakama_3 = 1;
-			flag_3_3 = 5;
 			story = 7;
 			return story;
 		case 4:
@@ -1038,7 +1018,6 @@ int story_3(void)
 					);
 			enterkey();
 			battle(11);
-			flag_3_3 = 6;
 			break;
 		case 5:
 			printf( "\n きれいな道を通る\n"
@@ -1050,7 +1029,6 @@ int story_3(void)
 			printf( "\n 標識を見ると”この先、街”とある\n"
 					);
 			enterkey();
-			flag_3_3 = 7;
 			story = 6;
 			return story;
 		case 6:
@@ -1062,7 +1040,6 @@ int story_3(void)
 			enterkey();
 			printf( "\n そこは湖だった・・・・・・\n"
 					);
-			flag_3_3 = 8;
 			story = 11;
 			return story;
 		default:
@@ -1103,13 +1080,11 @@ int story_3(void)
 			printf( "\n 森を抜ける\n"
 					);
 			enterkey();
-			flag_3_4 = 1;
 			break;
 		case 2:
 			printf( "\n その場を去った\n"
 					);
 			enterkey();
-			flag_3_4 = 2;
 			break;
 		default:
 			break;
@@ -1850,10 +1825,11 @@ int story_8(void)
 			printf( "\n 旅は続く\n"
 					);
 			enterkey();
-			return 9;
+			break;
 		default:
 			exit(0);
 	}
+	return 9;
 }
 
 /* 物語９（海） */
@@ -2035,7 +2011,7 @@ int end(int flag_end)
 	}
 	printf("\n 終わります・・・・・・\n\n");
 	
-	return 0;
+	return 99;
 }
 
 /* 戦闘 */
@@ -2047,16 +2023,45 @@ int battle(int ene)
 	/* 敵選択 */
 	switch(ene){
 		case 0:
-			if(flag==1){
+			switch(flag){
+			case 1:
 				strncpy(ene_name,"初心者",sizeof(ene_name));
 				ene_hp = 20;
 				ene_power = 2;
 				ene_money = 20;
-			} else if(flag==6){
+				break;
+			case 2:
+				strncpy(ene_name,"初心者",sizeof(ene_name));
+				ene_hp = 20;
+				ene_power = 2;
+				ene_money = 20;
+				break;
+			case 3:
+				strncpy(ene_name,"初心者",sizeof(ene_name));
+				ene_hp = 20;
+				ene_power = 2;
+				ene_money = 20;
+				break;
+			case 4:
+				strncpy(ene_name,"初心者",sizeof(ene_name));
+				ene_hp = 20;
+				ene_power = 2;
+				ene_money = 20;
+				break;
+			case 5:
+				strncpy(ene_name,"初心者",sizeof(ene_name));
+				ene_hp = 20;
+				ene_power = 2;
+				ene_money = 20;
+				break;
+			case 6:
 				strncpy(ene_name,"中堅",sizeof(ene_name));
 				ene_hp = 200;
 				ene_power = 20;
 				ene_money = 100;
+				break;
+			default:
+				break;
 			}
 		case 1:
 			strncpy(ene_name,"こげたもの",sizeof(ene_name));
@@ -2292,7 +2297,7 @@ int battle(int ene)
 				);
 		hp -= ene_power;
 		enterkey();
-		ikikaeru();
+		ikikaeru();//生き返る草を使う
 		if(hp<=0){
 			if(ene==29){
 				printf( "\n 龍とともに落ちていく\n"
@@ -2333,8 +2338,12 @@ void make_char(void)
 			scanf("%s",name);
 			hp = HP;
 			power = POWER;
+			money = MONEY;
+			kusa = KUSA;
 			flag = 1;
 			save_write();
+			printf( "\n キャラクター作成終了\n");
+			enterkey();
 			break;
 		case 2:
 			printf("\n このままでいくよ\n");
@@ -2352,32 +2361,32 @@ void enterkey(void)
 	system("cls");
 }
 
+/* ステータス */
 void ste(void)
 {
-printf("\n %s 体力：%d  力：%d  お金： %d 生き返る草：%d\n",name ,hp ,power,money,kusa);
-if(nakama_1==1)
-	printf("\n %s 体力：%d  力：%d\n",name_1, hp_1, power_1);
-if(nakama_2==1)
-	printf("\n %s 体力：%d  力：%d\n",name_2, hp_2, power_2);
-if(nakama_3==1)
-	printf("\n %s 体力：%d  力：%d\n",name_3, hp_3, power_3);
-if(nakama_4==1)
-	printf("\n %s 体力：%d  力：%d\n",name_4, hp_4, power_4);
-if(nakama_5==1)
-	printf("\n %s 体力：%d  力：%d\n",name_5, hp_5, power_5);
+	printf("\n %s 体力：%d  力：%d  お金： %d 生き返る草：%d\n",name ,hp ,power,money,kusa);
+	if(nakama_1==1)
+		printf("\n %s 体力：%d  力：%d\n",name_1, hp_1, power_1);
+	if(nakama_2==1)
+		printf("\n %s 体力：%d  力：%d\n",name_2, hp_2, power_2);
+	if(nakama_3==1)
+		printf("\n %s 体力：%d  力：%d\n",name_3, hp_3, power_3);
+	if(nakama_4==1)
+		printf("\n %s 体力：%d  力：%d\n",name_4, hp_4, power_4);
+	if(nakama_5==1)
+		printf("\n %s 体力：%d  力：%d\n",name_5, hp_5, power_5);
 }
 
+/* 書き込み */
 void save_write(void)
 {
 	FILE *fp;
 	fp = fopen("practice_data.txt","w");
 	fprintf(fp,"%s\n",name);
-	/*
-	fprintf(fp,"%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",name,hp,power,money,flag,kusa,nakama_1,nakama_2,nakama_3,nakama_4,nakama_5,power_1,power_2,power_3,power_4,power_5);
-	*/
 	fclose(fp);
 }
 
+/* 読み取り */
 void save_read(void)
 {
 	FILE *fp;
@@ -2388,6 +2397,7 @@ void save_read(void)
 	fclose(fp);
 }
 
+/* 選択 */
 void menu(void)
 {
 	int sele_menu;
@@ -2477,54 +2487,72 @@ void menu(void)
 	}
 }
 
+/* 店 */
 void shop(void)
 {
 	int sele_shop;
-	int sele_shop_2;
 	int loop = 1;
 	
 	while(loop!=0){
 		printf( "\n ==============================\n"
-				"\n 1.パワー（１０００円）（力＋１０）"
-				"\n 2.生き返る草（５０００円）"
-				"\n 3.終了\n"
+				"\n 1.パワー（1000円）"
+				"\n 2.パパワー（5000円）"
+				"\n 3.パパパワー(10000円)"
+				"\n 4.生き返る草（10000円）"
+				"\n 5.終了\n"
 				);
 		printf( "\n 入力：");
 		scanf( "%d",&sele_shop);
-		printf( "\n いくつ？\n"
-				"\n 入力："
-						);
-		scanf( "%d",&sele_shop_2);
 		system("cls");
-		if(sele_shop_2>0){
-		} else {
-			printf( "\n 入力エラー\n");
-			sele_shop = 3;
-			enterkey();
-		}
 		switch(sele_shop){
 			case 1:
-				if(money<1000*sele_shop_2){
+				if(money<1000){
 					printf( "\n お金が足りません\n");
 					enterkey();
-					break;
+				} else if(money>=1000){
+					printf( "\n パワーを買った！！\n");
+					printf( "\n 力が１０上がった！！\n");
+					power += 10;
+					money -= 1000;
+				} else {
 				}
-				printf( "\n パワーを%d個買った！！\n",sele_shop_2);
-				printf( "\n 力が%d上がった！！\n",10*sele_shop_2);
-				power += 10 * sele_shop_2;
-				money -= 1000 * sele_shop_2;
 				break;
 			case 2:
-				if(money<5000*sele_shop_2){
+				if(money<5000){
 					printf( "\n お金が足りない\n");
 					enterkey();
-					break;
+				} else if(money>=5000){
+					printf( "\n パパワーを買った！！\n");
+					printf( "\n 力が５０上がった！！\n");
+					power += 50;
+					money -= 5000;
+				} else {
 				}
-				printf( "\n 生き返る草を%d個買った！！\n",sele_shop_2);
-				kusa += sele_shop_2;
-				money -= 5000 * sele_shop_2;
 				break;
 			case 3:
+				if(money<10000){
+					printf( "\n お金が足りない\n");
+					enterkey();
+				} else if(money>=10000){
+					printf( "\n 1パパパワーを買った！！\n");
+					printf( "\n 力が１００上がった！！\n");
+					power += 100;
+					money -= 10000;
+				} else {
+				}
+				break;
+			case 4:
+				if(money<10000){
+					printf( "\n お金が足りない\n");
+					enterkey();
+				} else if(money>=10000){
+					printf( "\n 生き返る草を買った！！\n");
+					kusa += 1;
+					money -= 10000;
+				} else {
+				}
+				break;
+			case 5:
 				loop = 0;
 				break;
 			default:
@@ -2533,21 +2561,115 @@ void shop(void)
 	}	
 }
 
+/* 宿 */
 void inn(void)
 {
-	printf( "\n ５００円かかります\n");
-	enterkey();
-	if(money<500){
-		printf( "\n お金が足りない\n");
-		enterkey();
-	}else if(money>=500){
-		printf( "\n 体力が２０回復した！！\n");
-		hp += 20;
-		money -= 500;
-		enterkey();
+	int sele;
+	
+	printf( "\n お金：%d\n\n",money);
+	
+	printf( "\n どの宿？\n"
+			"\n 1.安い宿（500円）"
+			"\n 2.普通の宿（2000円）"
+			"\n 3.高級な宿（5000円）"
+			"\n 4.我が家（20000円）\n"
+			);
+	printf( "\n 入力："
+			);
+	scanf( "%d",&sele);
+	switch(sele){
+		case 1:
+			if(money<500){
+				printf( "\n お金が足りない\n");
+				enterkey();
+			}else if(money>=500){
+				printf( "\n 体力が２０回復した！！\n");
+				hp += YADO_1;
+				money -= 500;
+			if(nakama_1==1)
+				hp_1 += YADO_1;
+			if(nakama_2==1)
+				hp_2 += YADO_1;
+			if(nakama_3==1)
+				hp_3 += YADO_1;
+			if(nakama_4==1)
+				hp_4 += YADO_1;
+			if(nakama_5==1)
+				hp_5 += YADO_1;
+				enterkey();
+			} else {
+			}
+			break;
+		case 2:
+			if(money<2000){
+				printf( "\n お金が足りない\n");
+				enterkey();
+			}else if(money>=2000){
+				printf( "\n 体力が１００回復した！！\n");
+				hp += YADO_2;
+				money -= 2000;
+				if(nakama_1==1)
+					hp_1 += YADO_2;
+				if(nakama_2==1)
+					hp_2 += YADO_2;
+				if(nakama_3==1)
+					hp_3 += YADO_2;
+				if(nakama_4==1)
+					hp_4 += YADO_2;
+				if(nakama_5==1)
+					hp_5 += YADO_2;
+				enterkey();
+			} else {
+			}
+			break;
+		case 3:
+			if(money<5000){
+				printf( "\n お金が足りない\n");
+				enterkey();
+			}else if(money>=5000){
+				printf( "\n 体力が３００回復した！！\n");
+				hp += YADO_3;
+				money -= 5000;
+				if(nakama_1==1)
+					hp_1 += YADO_3;
+				if(nakama_2==1)
+					hp_2 += YADO_3;
+				if(nakama_3==1)
+					hp_3 += YADO_3;
+				if(nakama_4==1)
+					hp_4 += YADO_3;
+				if(nakama_5==1)
+					hp_5 += YADO_3;
+				enterkey();
+			} else {
+			}
+			break;
+		case 4:
+			if(money<20000){
+				printf( "\n お金が足りない\n");
+				enterkey();
+			}else if(money>=2000){
+				printf( "\n 体力が２０００回復した！！\n");
+				hp += YADO_4;
+				money -= 20000;
+				if(nakama_1==1)
+					hp_1 += YADO_4;
+				if(nakama_2==1)
+					hp_2 += YADO_4;
+				if(nakama_3==1)
+					hp_3 += YADO_4;
+				if(nakama_4==1)
+					hp_4 += YADO_4;
+				if(nakama_5==1)
+					hp_5 += YADO_4;
+				enterkey();
+			} else {
+			}
+			break;
 	}
 }
 
+/* 生き返る草 */
 void ikikaeru(void)
 {
 	if(hp<=0){
@@ -2559,42 +2681,3 @@ void ikikaeru(void)
 		}
 	}
 }
-
-void mini_game_1(void)
-{
-	printf( "\n \n"
-			);
-}
-		
-
-	/* sele1(始) */
-	/*
-	printf( 
-			);
-	enterkey();
-	printf( 
-			);
-	printf("\n 入力：");
-	scanf("%d",&sele);
-	enterkey();
-	switch(sele){
-		case 1:
-			printf( 
-					);
-			enterkey();
-			flag = 1;
-			break;
-		case 2:
-			printf( 
-					);
-			enterkey();
-			flag = 2;
-			break;
-		default:
-			printf("\n 終了・・・・・・\n");
-			exit(0);
-	}
-	ste();
-	enterkey();
-	*/
-	/* sele1(終) */
