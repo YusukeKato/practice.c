@@ -24,6 +24,24 @@ enum yado{
 	YADO_4 = 2000
 };
 
+enum Story12{
+	Story_12_1 = 13,
+	Story_12_2 = 14,
+	Story_12_3 = 15,
+	Story_12_4 = 16,
+	Story_12_5 = 17,
+	Story_12_6 = 18,
+	Story_12_7 = 19,
+	Story_12_8 = 20,
+	Story_12_9 = 21,
+	Story_12_01 = 22,
+	Story_12_02 = 23,
+	Story_12_03 = 24,
+	Story_12_04 = 25,
+	Story_12_05 = 26,
+	Story_12_099 = 27,
+};
+
 /* プロトタイプ宣言 */
 void enterkey(void);
 void ste(void);
@@ -44,12 +62,28 @@ int story_9(void);
 int story_10(void);
 int story_11(void);
 int story_12(void);
+int story_12_1(void);
+int story_12_2(void);
+int story_12_3(void);
+int story_12_4(void);
+int story_12_5(void);
+int story_12_6(void);
+int story_12_7(void);
+int story_12_8(void);
+int story_12_9(void);
+int story_12_01(void);
+int story_12_02(void);
+int story_12_03(void);
+int story_12_04(void);
+int story_12_05(void);
+int story_12_099(void);
 int battle(int ene);
 void menu(void);
 void shop(void);
 void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
+void miniGame_1(void);
 
 /* エンターキーのため */
 static char key;
@@ -123,19 +157,52 @@ int main(void)
 				flag = story_12();//魔王城
 				break;
 			case 13:
-				flag = end(13);
+				flag = story_12_1();//1階
 				break;
 			case 14:
-				flag = end(14);
+				flag = story_12_2();//2階
 				break;
 			case 15:
-				flag = end(15);
+				flag = story_12_3();//3階
 				break;
 			case 16:
-				flag = end(16);
+				flag = story_12_4();//4階
 				break;
 			case 17:
-				flag = end(17);
+				flag = story_12_5();//5階
+				break;
+			case 18:
+				flag = story_12_6();//6階
+				break;
+			case 19:
+				flag = story_12_7();//7階
+				break;
+			case 20:
+				flag = story_12_8();//8階
+				break;
+			case 21:
+				flag = story_12_9();//9階
+				break;
+			case 22:
+				flag = story_12_01();//地下1階
+				break;
+			case 23:
+				flag = story_12_02();//地下2階
+				break;
+			case 24:
+				flag = story_12_03();//地下3階
+				break;
+			case 25:
+				flag = story_12_04();//地下4階
+				break;
+			case 26:
+				flag = story_12_05();//地下5階
+				break;
+			case 27:
+				flag = story_12_099();//地下99階
+				break;
+			case 28:
+				flag = end(28);
 				break;
 			default:
 				printf("\n 終了・・・・・・\n");
@@ -1964,7 +2031,7 @@ int story_11(void)
 
 /* 物語１２（魔王城） */
 int story_12(void)
-{
+{	
 	save_write();
 	
 	printf( "\n 十二章\n"
@@ -1983,27 +2050,421 @@ int story_12(void)
 			);
 	enterkey();
 	
+	return Story_12_1;
+}
+	
+int story_12_1(void)
+{
+	int sele;
+	
 	/* １階（始） */
 	printf( "\n １階\n"
 			);
 	enterkey();
-	
-	return 0;
+	printf( "\n 壁にかかった松明だけが光源だ\n"
+			"\n 暗闇の中何かが動いている・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n 白い蛇「ここは魔王城だぞ、当たり前だが魔王がいる」\n"
+			);
+	enterkey();
+	printf( "\n 白い蛇「魔王と闘いに来たのか」\n"
+			);
+	enterkey();
+	printf( "\n 白い蛇「やめとけ、やめとけ、意味がない」\n"
+			);
+	enterkey();
+	printf( "\n 白い蛇「俺が止めてやるよ」\n"
+			);
+	enterkey();
+	battle(30);//バトル３０
+	printf( "\n 階段が二つある\n"
+			);
+	printf( "\n どっち？\n"
+			"\n 1.豪華な階段\n"
+			"\n 2.汚れた階段\n"
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n 豪華な階段を進む\n"
+					"\n かなりお金がかかっている\n"
+					);
+			enterkey();
+			ste();
+			enterkey();
+			return Story_12_5;
+		case 2:
+			printf( "\n 汚れた階段を進む\n"
+					"\n 何か匂う・・・・・・くさい・・・・・・\n"
+					);
+			enterkey();
+			ste();
+			enterkey();
+			return Story_12_6;
+	}
+	/* １階（終）*/
 }
+	
+int story_12_2(void)
+{
+	int sele;
+	
+	/* ２階（始） */
+	printf( "\n ２階\n"
+			);
+	enterkey();
+	printf( "\n とてつもなく寒く、吐く息は白い\n"
+			"\n 何かが空中をさまよう・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n 輝く幽霊「人間がここまでくるなんて」\n"
+			);
+	enterkey();
+	printf( "\n 輝く幽霊「ここは暗いでしょ」\n"
+			);
+	enterkey();
+	printf( "\n 輝く幽霊「見ての通り、私は輝いてる」\n"
+			);
+	enterkey();
+	printf( "\n 輝く幽霊「今なら100,000円で道を照らしてあげるわ」\n"
+			);
+	enterkey();
+	printf( "\n 光源を頼む？\n"
+			"\n 1.頼む\n"
+			"\n 2.いらない\n"
+			);
+	enterkey();
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			if(money<100000){
+				printf( "\n お金がたりない\n"
+						"\n 輝く幽霊「残念ね」\n"
+						);
+				enterkey();
+			} else if(money>=100000){
+				money -= 100000;
+				printf( "\n 毎度あり！！\n"
+						"\n とっておきの道を照らすわ！！\n"
+						);
+				enterkey();
+				return Story_12_099;
+			}
+			break;
+		case 2:
+			printf( "\n 輝く幽霊「あっそ」\n"
+					);
+			enterkey();
+			battle(31);
+			ste();
+			enterkey();
+			break;
+		default:
+			return Story_12_1;
+	}
+	printf( "\n 次へ進もうとすると、\n"
+			"\n 前から大きな鉄球が転がってきた！！\n"
+			);
+	enterkey();
+	printf( "\n どちらへよける？\n"
+			"\n 1.左へとぶ！！\n"
+			"\n 2.右へとぶ！！！\n"
+			);
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n 左へとんでよけた！！\n"
+					);
+			enterkey();
+			printf( "\n しかし、そこは落とし穴だ！！\n"
+					);
+			enterkey();
+			return Story_12_04;
+		case 2:
+			printf( "\n 右へとんでよけた！！！\n"
+					);
+			enterkey();
+			printf( "\n なんとかよけきった\n"
+					);
+			enterkey();
+			printf( "\n 階段を見つけた\n"
+					"\n 1.のぼる\n"
+					"\n 2.おりる\n"
+					);
+			enterkey();
+			printf( "\n 入力：");
+			scanf("%d",&sele);
+			switch(sele){
+				case 1:
+					return Story_12_8;
+				case 2:
+					return Story_12_01;
+				default:
+					return Story_12_1;
+			}
+		default:
+			return Story_12_1;
+	}
+	/* ２階（終）*/
+}
+	
+int story_12_3(void)
+{
+	int sele;
+	
+	/* ３階（始） */
+	printf( "\n ３階\n"
+			);
+	enterkey();
+	printf( "\n 部屋全体が赤い\n"
+			"\n 何かが空中をさまよう・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n くさいガス「闘いたくて仕方がない」\n"
+			"\n くさいガス「勝負しよう！！」\n"
+			);
+	enterkey();
+	printf( "\n くさいガスがクイズバトルを仕掛けてきた！！\n"
+			);
+	enterkey();
+	printf( "\n この世界の魔物は何種類？\n"
+			"\n 1.１０種\n"
+			"\n 2.２０種\n"
+			"\n 3.３０種\n"
+			"\n 4.４０種\n"
+			"\n 5.それ以外\n"
+			,name
+			);
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n くさいガス「残念」\n"
+					);
+			enterkey();
+			printf( "\n 落とし穴に落とされた\n"
+					);
+			enterkey();
+			return Story_12_5;
+		case 2:
+			printf( "\n くさいガス「残念だ」\n"
+					);
+			enterkey();
+			printf( "\n 落とし穴に落とされた\n"
+					);
+			enterkey();
+			return Story_12_8;
+		case 3:
+			printf( "\n くさいガス「違うよ」\n"
+					);
+			enterkey();
+			printf( "\n 落とし穴に落とされた\n"
+					);
+			enterkey();
+			return Story_12_05;
+		case 4:
+			printf( "\n くさいガス「正解！！流石だ！！！」\n"
+					);
+			enterkey();
+			printf( "\n くさいガス「この階段をのぼっていいよ」\n"
+					);
+			enterkey();
+			return Story_12_9;
+		case 5:
+			printf( "\n くさいガス「残念」\n"
+					);
+			enterkey();
+			printf( "\n 落とし穴に落とされた\n"
+					);
+			enterkey();
+			return Story_12_04;
+		default:
+			return Story_12_1;
+	}
+	/* ３階（終）*/
+}
+
+int story_12_4(void)
+{
+	int sele;
+	
+	printf( "\n ４階\n"
+			);
+	enterkey();
+	
+	printf( "\n とてつもなく熱い！！\n"
+			);
+	enterkey();
+	printf( "\n 燃える馬「ハハハッ！！ 熱いだろ！！」\n"
+			"\n 燃える馬「そのまま燃えてなくなってしまえ！！！」\n"
+			);
+	enterkey();
+	battle(32);
+	
+	printf( "\n 燃える馬「魔王がいる最上階へは」\n"
+			"\n 燃える馬「この階からは直接はいけない」\n"
+			);
+	enterkey();
+	printf( "\n 燃える馬「他の階を経由するんだな」\n"
+			);
+	enterkey();
+	
+	printf( "\n 階段が３つある\n"
+			);
+	enterkey();
+	printf( "\n どれ？\n"
+			"\n 1.左\n"
+			"\n 2.真ん中\n"
+			"\n 3.右\n"
+			);
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n ");
+	}
+}
+
+int story_12_5(void)
+{
+	int sele;
+	
+	printf( "\n ５階\n"
+			);
+	enterkey();
+	
+	printf( "\n 魔法の本が落ちている\n"
+			);
+	enterkey();
+	printf( "\n どの魔法を使う？\n"
+			"\n 1.水の魔法\n"
+			"\n 2.風の魔法\n"
+			"\n 3.火の魔法\n"
+			);
+	
+}
+
+int story_12_6(void)
+{
+	int sele_1,sele_2;
+	
+	printf( "\n ６階\n"
+			);
+	enterkey();
+	
+	printf( "\n ここは迷路になっているようだ\n"
+			);
+	enterkey();
+	printf( "\n 看板がある\n"
+			);
+	enterkey();
+	printf( "\n 「この階からいける階は\n"
+			"\n ４階、８階、地下２階の３つ」\n"
+			);
+	enterkey();
+	printf( "\n どの道？\n"
+			"\n 1.左\n"
+			"\n 2.右\n"
+			);
+	printf( "\n 入力：\n");
+	scanf("%d",&sele_1);
+	printf( "\n 次は？\n"
+			"\n 1.左\n"
+			"\n 2.真ん中\n"
+			"\n 3.右\n"
+			);
+	printf( "\n 入力：");
+	scanf("%d",&sele_2);
+	system("cls");
+	if(sele_1==1&&sele_2==1){
+		printf( "\n 落とし穴だ！！\n"
+				);
+		enterkey();
+		return Story_12_02;
+	} else if(sele_1==1&&sele_2==2){
+		printf( "\n 階段を見つけた\n"
+				);
+		enterkey();
+		return Story_12_8;
+	} else if(sele_1==1&&sele_2==3){
+		printf( "\n 階段を見つけた\n"
+				);
+		enterkey();
+		return Story_12_4;
+	} else if(sele_1==2&&sele_2==1){
+		printf( "\n 階段を見つけた\n"
+				);
+		enterkey();
+		return Story_12_8;
+	} else if(sele_1==2&&sele_2==2){
+		printf( "\n 階段を見つけた\n"
+				);
+		enterkey();
+		return Story_12_4;
+	} else if(sele_1==2&&sele_2==3){
+		printf( "\n 落とし穴だ！！\n"
+				);
+		enterkey();
+		return Story_12_02;
+	} else {
+		return Story_12_1;
+	}
+}
+
+int story_12_7(void)
+{
+	
+}
+
+int story_12_8(void)
+{
+	
+}
+
+int story_12_9(void)
+{
+	
+}
+
+int story_12_01(void)
+{
+	
+}
+
+int story_12_02(void)
+{
+	
+}
+
+int story_12_03(void)
+{
+	
+}
+
+int story_12_04(void)
+{
+	
+}
+
+int story_12_05(void)
+{
+	
+}
+
+int story_12_099(void)
+{
+	
+}
+
 
 /* 終わり */
 int end(int flag_end)
 {
 	switch(flag_end){
-		case 13:
-			break;
-		case 14:
-			break;
-		case 15:
-			break;
-		case 16:
-			break;
-		case 17:
+		case 28:
 			break;
 		default:
 			printf("\n end_default\n");
