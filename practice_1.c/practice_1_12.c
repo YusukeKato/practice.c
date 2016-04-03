@@ -1,6 +1,9 @@
 /* practice_1_12.c */
 /* YusukeKato */
-/* 2016.4.2 */
+/* 2016.4.3 */
+/* １．整理 */
+/* ２．調整 */
+/* ３．追加 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1918,6 +1921,9 @@ int story_9(void)
 /* 物語１０（龍） */
 int story_10(void)
 {
+	int sele;
+	int story;
+	
 	save_write();
 	
 	printf( "\n 十章\n"
@@ -1925,7 +1931,27 @@ int story_10(void)
 			);
 	enterkey();
 	
-	return 0;
+	/* sele1(始) */
+	printf( "\n 龍の背に乗って空を飛ぶ\n"
+			);
+	enterkey();
+	printf( "\n 龍は魔王を倒す協力をしてくれるらしい\n"
+			"\n 空の旅は快適だ\n"
+			);
+	enterkey();
+	printf( "\n しかし、魔王城から何かが飛んできた\n"
+			"\n 白い龍のようだ\n"
+			);
+	enterkey();
+	story = battle(29);
+	if(story==11){
+		return 11;
+	}
+	ste();
+	enterkey();
+	/* sele1(終) */
+	
+	return 12;
 }
 
 /* 物語１１（湖） */
@@ -1938,7 +1964,26 @@ int story_11(void)
 			);
 	enterkey();
 	
-	return 0;
+	/* sele1(始) */
+	printf( "\n そこは森の湖だった\n"
+			);
+	enterkey();
+	printf( "\n 湖の精霊「ここに何か用ですか」\n"
+			"\n 湖から精霊が出できた\n"
+			);
+	enterkey();
+	printf( "\n %sは魔王を倒すしたい旨を伝えた\n"
+			);
+	enterkey();
+	printf( "\n 湖の精霊「分かりました。私も行きましょう」\n"
+			);
+	enterkey();
+	nakama_5 = 1;
+	ste();
+	enterkey();
+	/* sele1(終) */
+	
+	return 12;
 }
 
 /* 物語１２（魔王城） */
@@ -1948,6 +1993,22 @@ int story_12(void)
 	
 	printf( "\n 十二章\n"
 			"\n 終わりの闘い\n"
+			);
+	enterkey();
+	
+	printf( "\n 魔王城に着いた\n"
+			);
+	enterkey();
+	printf( "\n 城全体が黒い霧に包まれている\n"
+			"\n 空気は重く、汚れていた\n"
+			);
+	enterkey();
+	printf( "\n 巨大な門を開いた\n"
+			);
+	enterkey();
+	
+	/* １階（始） */
+	printf( "\n １階\n"
 			);
 	enterkey();
 	
@@ -2165,6 +2226,12 @@ int battle(int ene)
 			ene_power = 100;
 			ene_money = 15000;
 			break;
+		case 29:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
 		default:
 			exit(0);
 	}
@@ -2227,6 +2294,15 @@ int battle(int ene)
 		enterkey();
 		ikikaeru();
 		if(hp<=0){
+			if(ene==29){
+				printf( "\n 龍とともに落ちていく\n"
+						);
+				enterkey();
+				printf( "\n 森の湖に落ちた・・・・・・\n"
+						);
+				enterkey();
+				return 11;
+			}
 			printf("\n %sは死んでしまった・・・・・・\n",name);
 			exit(0);
 		}	
@@ -2316,6 +2392,7 @@ void menu(void)
 {
 	int sele_menu;
 	int loop = 1;
+	int sele;
 	
 	while(loop!=0){
 		ste();
@@ -2324,9 +2401,10 @@ void menu(void)
 				" 選択してください\n"
 				" 1.戦闘\n"
 				" 2.ストーリーへ\n"
-				" 3.お店\n"
-				" 4.宿\n"
-				" 5.ゲーム終了（注意：セーブなし）\n"
+				" 3.人と話す\n"
+				" 4.お店\n"
+				" 5.宿\n"
+				" 6.ゲーム終了（注意：セーブなし）\n"
 				"==============================\n"
 				);
 		printf( "\n 入力：");
@@ -2344,11 +2422,50 @@ void menu(void)
 				loop = 0;
 				break;
 			case 3:
+				printf( "\n その辺の人と話す\n");
+				enterkey();
+				do{
+					switch(flag){
+						case 1:
+							break;
+						case 2:
+							break;
+						case 3:
+							break;
+						case 4:
+							break;
+						case 5:
+							break;
+						case 6:
+							break;
+						case 7:
+							break;
+						case 8:
+							break;
+						case 9:
+							break;
+						case 10:
+							break;
+						case 11:
+							break;
+						default:
+							break;
+					}
+					printf( "\n まだ話す？\n"
+							"\n 1.話す\n"
+							"\n 2.もういい\n"
+							);
+					printf( "\n 入力："
+							);
+					scanf("%d",&sele);
+				}while(sele==1);
+				break;
+			case 4:
 				printf( "\n 店に行く\n");
 				enterkey();
 				shop();
 				break;
-			case 4:
+			case 5:
 				printf( "\n 宿に泊まる\n");
 				enterkey();
 				inn();
