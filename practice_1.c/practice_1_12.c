@@ -1,7 +1,7 @@
-/* practice_1_12.c */
+/* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.3 */
+/* 2016.4.4 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,6 +40,7 @@ enum Story12{
 	Story_12_04 = 25,
 	Story_12_05 = 26,
 	Story_12_099 = 27,
+	Story_12_10 = 28
 };
 
 /* プロトタイプ宣言 */
@@ -77,13 +78,13 @@ int story_12_03(void);
 int story_12_04(void);
 int story_12_05(void);
 int story_12_099(void);
+int story_12_10(void);
 int battle(int ene);
 void menu(void);
 void shop(void);
 void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
-void miniGame_1(void);
 
 /* エンターキーのため */
 static char key;
@@ -113,6 +114,7 @@ static int flag_3_1 = 0, flag_3_2 = 0, flag_3_3 = 0, flag_3_4 = 0;
 static int flag_6_2 = 0;
 static int flag_7_1 = 0, flag_7_2 = 0, flag_7_3 = 0, flag_7_4 = 0;
 
+/* メイン関数 */
 int main(void)
 {
 	start();
@@ -202,7 +204,9 @@ int main(void)
 				flag = story_12_099();//地下99階
 				break;
 			case 28:
-				flag = end(28);
+				flag = story_12_10();//最上階
+			case 29:
+				flag = end(1);
 				break;
 			default:
 				printf("\n 終了・・・・・・\n");
@@ -2305,10 +2309,10 @@ int story_12_4(void)
 	battle(32);
 	
 	printf( "\n 燃える馬「魔王がいる最上階へは」\n"
-			"\n 燃える馬「この階からは直接はいけない」\n"
+			"\n 燃える馬「クイズを解かなきゃたどり着けない」\n"
 			);
 	enterkey();
-	printf( "\n 燃える馬「他の階を経由するんだな」\n"
+	printf( "\n 燃える馬「がんばれよ」\n"
 			);
 	enterkey();
 	
@@ -2337,6 +2341,12 @@ int story_12_5(void)
 	enterkey();
 	
 	printf( "\n 魔法の本が落ちている\n"
+			"\n 魔法について書いてある\n"
+			);
+	enterkey();
+	printf( "\n 魔王城についての情報も書いてある\n"
+			"\n 「魔王は最上階で勇者を待つ\n"
+			"\n ＊＊は地下深くで何かを待つ」\n"
 			);
 	enterkey();
 	printf( "\n どの魔法を使う？\n"
@@ -2344,7 +2354,39 @@ int story_12_5(void)
 			"\n 2.風の魔法\n"
 			"\n 3.火の魔法\n"
 			);
-	
+	printf( "\n 入力：");
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			printf( "\n 水の魔法を使った！！\n");
+			enterkey();
+			printf( "\n 地面から大量の水があふれだしてくる\n"
+					"\n 洪水となって押し寄せる！！\n"
+					);
+			enterkey();
+			printf( "\n 他の階まで流された・・・・・・\n");
+			enterkey();
+			return Story_12_3;
+		case 2:
+			printf( "\n 風の魔法を使った！！\n");
+			enterkey();
+			printf( "\n 暴風が吹き荒れる！！\n");
+			enterkey();
+			printf( "\n 他の階まで吹き飛ばされた！！\n");
+			enterkey();
+			return Story_12_7;
+		case 3:
+			printf( "\n 火の魔法を使った！！\n");
+			enterkey();
+			printf( "\n 爆発した！！\n"
+					"\n 床が吹き飛んだ！！\n");
+			enterkey();
+			printf( "\n 下の階へ落ちた！！\n");
+			enterkey();
+			return Story_12_03;
+		default:
+			return story_12_1;
+	}
 }
 
 int story_12_6(void)
@@ -2426,6 +2468,47 @@ int story_12_8(void)
 
 int story_12_9(void)
 {
+	printf( "\n ７階\n");
+	enterkey();
+	
+	printf( "\n 物音一つしない・・・・・・\n"
+			"\n 静けさだけが漂う・・・・・・\n"
+			);
+	enterkey();
+	printf( "\n そこには白い龍がいた\n");
+	enterkey();
+	printf( "\n 白い龍「ここを通すわけにはいかない」\n"
+			"\n 白い龍「魔王の命令だ」\n"
+			);
+	enterkey();
+	battle(33);
+	printf( "\n 白い龍「私の負けだ、通れ」\n");
+	enterkey();
+	printf( "\n その先には大きな階段があった\n");
+	enterkey();
+	
+	return story_12_10;
+}
+
+int story_12_10(void)
+{
+	int story;
+	
+	printf( "\n 最上階・魔王の間\n");
+	enterkey();
+	
+	printf( "\n 魔王「よくぞ、ここまで来た！！」\n"
+			"\n 魔王「俺が魔王だ！！！」\n"
+			);
+	enterkey();
+	printf( "\n 魔王「お俺をたおせば世界は救われる」\n"
+			"\n 魔王「お前が死ねば世界は俺のものだ！！」\n"
+			);
+	enterkey();
+	story = battle(34);
+	if(story==29){
+		return 29;
+	}
 	
 }
 
@@ -2464,7 +2547,8 @@ int story_12_099(void)
 int end(int flag_end)
 {
 	switch(flag_end){
-		case 28:
+		case 1:
+			printf( "\n end1\n");
 			break;
 		default:
 			printf("\n end_default\n");
@@ -2768,6 +2852,8 @@ int battle(int ene)
 						);
 				enterkey();
 				return 11;
+			} if(ene==34){
+				return 29;
 			}
 			printf("\n %sは死んでしまった・・・・・・\n",name);
 			exit(0);
