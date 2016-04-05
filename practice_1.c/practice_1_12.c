@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.4 */
+/* 2016.4.5 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -85,6 +85,7 @@ void shop(void);
 void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
+void miniGame_1(void);
 
 /* エンターキーのため */
 static char key;
@@ -2239,7 +2240,7 @@ int story_12_3(void)
 			"\n 2.２０種\n"
 			"\n 3.３０種\n"
 			"\n 4.４０種\n"
-			"\n 5.それ以外\n"
+			"\n 5.５０種\n"
 			,name
 			);
 	printf( "\n 入力：");
@@ -2303,11 +2304,14 @@ int story_12_4(void)
 			);
 	enterkey();
 	printf( "\n 燃える馬「ハハハッ！！ 熱いだろ！！」\n"
-			"\n 燃える馬「そのまま燃えてなくなってしまえ！！！」\n"
+			"\n 燃える馬「そのまま燃えて溶けてしまえ！！！」\n"
 			);
 	enterkey();
 	battle(32);
 	
+	printf( "\n 燃える馬「情報をやろう」\n"
+			);
+	enterkey();
 	printf( "\n 燃える馬「魔王がいる最上階へは」\n"
 			"\n 燃える馬「クイズを解かなきゃたどり着けない」\n"
 			);
@@ -2458,17 +2462,28 @@ int story_12_6(void)
 
 int story_12_7(void)
 {
+	printf( "\n ７階\n");
+	enterkey();
 	
+	printf( "\n ここはカジノ\n"
+			"\n 好きなだけお金が稼げるところ\n"
+			);
+	enterkey();
+	miniGame_1();
+	
+	return Story_12_1;
 }
 
 int story_12_8(void)
 {
+	printf( "\n ８階\n");
+	enterkey();
 	
 }
 
 int story_12_9(void)
 {
-	printf( "\n ７階\n");
+	printf( "\n ９階\n");
 	enterkey();
 	
 	printf( "\n 物音一つしない・・・・・・\n"
@@ -2514,31 +2529,43 @@ int story_12_10(void)
 
 int story_12_01(void)
 {
+	printf( "\n 地下１階\n");
+	enterkey();
 	
 }
 
 int story_12_02(void)
 {
+	printf( "\n 地下２階\n");
+	enterkey();
 	
 }
 
 int story_12_03(void)
 {
+	printf( "\n 地下３階\n");
+	enterkey();
 	
 }
 
 int story_12_04(void)
 {
+	printf( "\n 地下４階\n");
+	enterkey();
 	
 }
 
 int story_12_05(void)
 {
+	printf( "\n 地下５階\n");
+	enterkey();
 	
 }
 
 int story_12_099(void)
 {
+	printf( "\n 地下９９階\n");
+	enterkey();
 	
 }
 
@@ -3227,4 +3254,65 @@ void ikikaeru(void)
 			enterkey();
 		}
 	}
+}
+
+/* ブラックジャック */
+void miniGame_1(void)
+{
+	int pRand[100];
+	int eRand[100];
+	int i,j,q,qq;
+	int sum;
+	int sele;
+	
+	for(i=0; i<100; i++){
+		pRand[i] = 0;
+		eRand[i] = 0;
+	}
+	
+	printf( "\n ブラックジャック\n"
+			"\n 合計２１をめざせ！！\n"
+			);
+	enterkey();
+	
+	printf( "\n ゲームで遊びますか？\n"
+			"\n 1.遊ぶ\n"
+			"\n 2.遊ばない\n"
+			);
+	printf( "\n 入力：");
+	scanf( "%d",&sele);
+	switch(sele){
+		case 1:
+			for(i=0; q!=0; i++){
+				srand((unsigned)time(NULL));
+				pRand[i] = rand()%10 + 1;
+				printf( "\n %dつ目の値：%d \n",i+1 ,pRand[i]);
+				for(j=0; j<100; j++){
+					sum += pRand[j];
+				}
+				printf( "\n 合計：%d \n",sum);
+				printf( "\n この値で勝負しますか？\n"
+						"\n 1.勝負する\n"
+						"\n 2.まだ足りない\n"
+						);
+				printf( "\n 入力：");
+				scanf("%d",&sele);
+				switch(sele){
+					case 1:
+						q = 0;
+						break;
+					case 2:
+						break;
+					default:
+					exit(0);
+				}
+			}
+			break;
+		case 2:
+			qq = 0;
+			break;
+		default:
+			exit(0);
+	}
+	
 }
