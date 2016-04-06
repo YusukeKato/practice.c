@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.5 */
+/* 2016.4.6 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +24,7 @@ enum yado{
 	YADO_4 = 2000
 };
 
+/* ストーリー番号 */
 enum Story12{
 	Story_12_1 = 13,
 	Story_12_2 = 14,
@@ -41,6 +42,13 @@ enum Story12{
 	Story_12_05 = 26,
 	Story_12_099 = 27,
 	Story_12_10 = 28
+};
+
+/* エンド */
+enum end{
+	end_1 = 29,
+	end_2 = 30,
+	end_3 = 31
 };
 
 /* プロトタイプ宣言 */
@@ -79,6 +87,7 @@ int story_12_04(void);
 int story_12_05(void);
 int story_12_099(void);
 int story_12_10(void);
+int story_12_010(void);
 int battle(int ene);
 void menu(void);
 void shop(void);
@@ -86,6 +95,7 @@ void inn(void);
 void ikikaeru(void);
 int end(int flag_end);
 void miniGame_1(void);
+void miniGame_2(void);
 
 /* エンターキーのため */
 static char key;
@@ -2476,9 +2486,42 @@ int story_12_7(void)
 
 int story_12_8(void)
 {
+	int rand_1;
+	
 	printf( "\n ８階\n");
 	enterkey();
-	
+	printf( "\n 機械音が響く・・・・・・\n");
+	enterkey();
+	printf( "\n ロ・ロボット「ワタシハロボットデス」\n"
+			"\n ロ・ロボット「Dr.小池二ツクラレマシタ」\n"
+			);
+	enterkey();
+	printf( "\n ロ・ロボット「ここにキタモノトタタカエ、」\n"
+			"\n ロ・ロボット「トイウメイレイヲウケテイマス」\n"
+			);
+	enterkey();
+	battle(35);//バトル３５
+	printf( "\n ロ・ロボット「コノカイカラウエヘハアガレマセン」\n"
+			"\n ロ・ロボット「マオウハイチバンウエニイマス」\n"
+			"\n ロ・ロボット「・・・バクハツ・・・シマ・・・ス・・・」\n"
+			);
+	enterkey();
+	printf( "\n ロ・ロボットが爆発した！！！\n"
+			"\n 吹っ飛ばされた！！\n"
+			);
+	enterkey();
+	srand((unsigned)time(NULL));
+	rand_1 = rand()%3 + 1;
+	switch(rand_1){
+		case 1:
+			return Story_12_1;
+		case 2:
+			return Story_12_1;
+		case 3:
+			return Story_12_1;
+		default:
+			return Story_12_1;
+	}
 }
 
 int story_12_9(void)
@@ -2531,6 +2574,15 @@ int story_12_01(void)
 {
 	printf( "\n 地下１階\n");
 	enterkey();
+	printf( "\n ハイテンポでノリノリな曲が聴こえる\n"
+			"\n ギターを持ったモヒカン頭の男がいた\n"
+			);
+	enterkey();
+	printf( "\n モヒカン頭「ビートを刻むぜ！！！」\n");
+	enterkey();
+	battle(36);
+	printf( "\n モヒカン頭「」\n");
+	enterkey();
 	
 }
 
@@ -2538,14 +2590,41 @@ int story_12_02(void)
 {
 	printf( "\n 地下２階\n");
 	enterkey();
-	
+	printf( "\n そこはキャベツまみれだった\n"
+			);
+	enterkey();
+	printf( "\n キャベツの王「自分から食われにくるとわ」\n"
+			"\n キャベツの王「おいしくいただいてやるわ」\n"
+			);
+	enterkey();
+	battle(36);
+	printf( "\n ");
 }
 
 int story_12_03(void)
 {
+	int sele;
+	
 	printf( "\n 地下３階\n");
 	enterkey();
-	
+	printf( "\n 小粋なジャズが聴こえる\n");
+	enterkey();
+	printf( "\n マジシャン「一勝負していくかい？」\n"
+			"\n 1.勝負する\n"
+			"\n 2.やめておく\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			miniGame_2();
+			break;
+		case 2:
+			break;
+		default:
+			exit(0);
+	}
+	return Story_12_1;
 }
 
 int story_12_04(void)
@@ -2559,14 +2638,71 @@ int story_12_05(void)
 {
 	printf( "\n 地下５階\n");
 	enterkey();
+}
+
+int story_12_010(void)
+{
+	int sele_hp;
+	int q;
 	
+	printf( "\n 地下１０階・研究所\n");
+	enterkey();
+	printf( "\n たくさんの機械が置かれている\n"
+			"\n しかし、ちゃんと整理整頓されている\n"
+			);
+	enterkey();
+	printf( "\n Dr.小池「私がこの研究所の所長じゃ」\n"
+			"\n Dr.小池「魔物についての研究をしている」\n"
+			);
+	enterkey();
+	printf( "\n Dr.小池「私が開発したこの機械を使えば」\n"
+			"\n Dr.小池「体力を犠牲にして力を増幅させることができる」\n"
+			);
+	enterkey();
+	while(q!=0){
+		printf( "\n 犠牲にする体力の値を入力してください\n"
+				"\n 入力："
+				);
+		scanf("%d",&sele_hp);
+		if(hp<=sele_hp){
+			printf( "\n 体力が足りない\n");
+			enterkey();
+		} else if(hp>sele_hp) {
+			printf( "\n 体力%d を犠牲に力が%d増えた！！\n",sele_hp ,sele_hp);
+			hp -= sele_hp;
+			power += sele_hp;
+			q = 0;
+			enterkey();
+		} else {
+			exit(0);
+		}
+	}
+	return Story_12_1;
 }
 
 int story_12_099(void)
 {
-	printf( "\n 地下９９階\n");
+	printf( "\n 地下９９階・魔神の間\n");
 	enterkey();
+	printf( "\n そこには魔神がいた\n"
+			);
+	enterkey();
+	printf( "\n 魔神「よくここにきた！！」\n"
+			"\n 魔神「一万年近くここにいるが、」\n"
+			"\n 魔神「来たのはたった一人」\n"
+			);
+	enterkey();
+	printf( "\n 魔神「今は魔王とかいう若者が魔物を仕切っている」\n"
+			"\n 魔神「私のほうが強いのにな」\n"
+			);
+	enterkey();
+	printf( "\n 魔神「まあいい、せっかくここまできたのだ」\n"
+			"\n 魔神「！！！闘おう！！！」\n"
+			);
+	enterkey();
+	battle(40);
 	
+	return 30;
 }
 
 
@@ -3366,4 +3502,92 @@ void miniGame_1(void)
 		}
 	}
 	return 0;
+}
+
+/* ハイ＆ロー */
+void miniGame_2(void)
+{
+	int q;
+	int sele;
+	int sele_p;
+	int ran;
+	int ran_p;
+	int i = 0;
+	
+	while(q!=0){
+		i += 1;
+		printf( "\n お金：%d \n"
+				"\n 「ハイ＆ロー」で遊びますか？(%d回目)\n"
+				"\n 掛け金：%d円\n"
+				"\n 勝ったら%d倍！！\n"
+				"\n 1.遊ぶ\n"
+				"\n 2.やめておく\n"
+				"\n 入力："
+				,money ,i ,i*1000 ,i*2
+				);
+		scanf( "%d",&sele);
+		switch(sele){
+			case 1:
+				printf( "\n 「ハイ＆ロー」\n"
+						"\n 基となる数字に対して\n"
+						"\n 自分の数字が大きいか小さいか当てる\n"
+						);
+				enterkey();
+				srand((unsigned)time(NULL));
+				ran = rand()%12 + 2;
+				printf( "\n\n 基となる数字：%d \n",ran);
+				enterkey();
+				srand((unsigned)time(NULL));
+				ran_p = rand()%13 + 1;
+				printf( "\n あなたの数字：＊ \n");
+				enterkey();
+				printf( "\n あなたの数字は %d より上？下？（1～13）\n"
+						"\n 1.上\n"
+						"\n 2.下\n"
+						"\n 入力："
+						,ran
+						);
+				scanf("%d",&sele_p);
+				system("cls");
+				printf( "\n 基となる数字：%d \n"
+						"\n あなたの数字：%d \n"
+						,ran ,ran_p
+						);
+				enterkey();
+				if((ran>ran_p)&&sele_p==2) {
+					printf( "\n==============\n"
+							"\n   勝ち\n"
+							"\n==============\n"
+							);
+					money += (i*1000)*(i*2);
+				} else if((ran<ran_p)&&sele_p==1) {
+					printf( "\n==============\n"
+							"\n   勝ち\n"
+							"\n==============\n"
+							);
+					money += (i*1000)*(i*2);
+				} else if(ran==ran_p) {
+					printf( "\n 数字が同じなら負け\n");
+					printf( "\n==============\n"
+							"\n   負け\n"
+							"\n==============\n"
+							);	
+					money -= i*1000;
+					i = 0;
+				} else {
+					printf( "\n==============\n"
+							"\n   負け\n"
+							"\n==============\n"
+							);
+					money -= i*1000;
+					i = 0;
+				}
+				break;
+			case 2:
+				q = 0;
+				break;
+			default:
+				break;
+		}
+	}
 }
