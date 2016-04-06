@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.6 */
+/* 2016.4.7 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +21,8 @@ enum yado{
 	YADO_1 = 20,
 	YADO_2 = 100,
 	YADO_3 = 300,
-	YADO_4 = 2000
+	YADO_4 = 2000,
+	YADO_5 = 1000,
 };
 
 /* ストーリー番号 */
@@ -41,7 +42,8 @@ enum Story12{
 	Story_12_04 = 25,
 	Story_12_05 = 26,
 	Story_12_099 = 27,
-	Story_12_10 = 28
+	Story_12_10 = 28,
+	Story_12_010 = 29
 };
 
 /* エンド */
@@ -217,6 +219,9 @@ int main(void)
 			case 28:
 				flag = story_12_10();//最上階
 			case 29:
+				flag = story_12_010();
+				break;
+			case 30:
 				flag = end(1);
 				break;
 			default:
@@ -2472,15 +2477,30 @@ int story_12_6(void)
 
 int story_12_7(void)
 {
+	int sele;
+	int q;
+	
 	printf( "\n ７階\n");
 	enterkey();
-	
-	printf( "\n ここはカジノ\n"
-			"\n 好きなだけお金が稼げるところ\n"
-			);
-	enterkey();
-	miniGame_1();
-	
+	while(q!=0){
+		printf( "\n 宿に泊まりますか？\n"
+				"\n 1.泊まる\n"
+				"\n 2.やめておく\n"
+				"\n 入力："
+				);
+		scanf("%d",&sele);
+		switch(sele){
+			case 1:
+				inn();
+				break;
+			case 2:
+				q = 0;
+				break;
+			default:
+				q = 0;
+				break;
+		}
+	}
 	return Story_12_1;
 }
 
@@ -2604,6 +2624,7 @@ int story_12_02(void)
 int story_12_03(void)
 {
 	int sele;
+	int sele_2;
 	
 	printf( "\n 地下３階\n");
 	enterkey();
@@ -2617,7 +2638,22 @@ int story_12_03(void)
 	scanf("%d",&sele);
 	switch(sele){
 		case 1:
-			miniGame_2();
+			printf( "\n どれで遊ぶ？\n"
+					"\n 1.ブラックジャック\n"
+					"\n 2.ハイ＆ロー\n"
+					"\n 入力："
+					);
+			scanf( "%d",&sele_2);
+			switch(sele_2){
+				case 1:
+					miniGame_1();
+					break;
+				case 2:
+					miniGame_2();
+					break;
+				default:
+					break;
+			}
 			break;
 		case 2:
 			break;
@@ -2629,15 +2665,103 @@ int story_12_03(void)
 
 int story_12_04(void)
 {
+	int q,i;
+	int sele;
+	
 	printf( "\n 地下４階\n");
 	enterkey();
-	
+	printf( "\n そこは図書館だった\n"
+			"\n 本棚が上にも横にも無限に広がっている\n"
+			);
+	enterkey();
+	printf( "\n 真面目な館長「ここでは誰であろうと静かにしていてください」\n"
+			"\n 真面目な館長「読みたい本があれば静かに読んでください」\n"
+			);
+	enterkey();
+	while(q!=0){
+		printf( "\n 本を読みますか？\n"
+				"\n 1.読む\n"
+				"\n 2.やめておく\n"
+				"\n 入力："
+				);
+		scanf("%d",&sele);
+		switch(sele){
+			case 1:
+				srand((unsigned)time(NULL));
+				i = rand()%10 + 1;
+				switch(i){
+					case 1:
+						printf( "\n 魔王は最上階で勇者を待つ\n"
+								);
+						enterkey();
+						break;
+					case 2:
+						printf( "\n 上は９階まであり、その上に最上階がある\n"
+								);
+						enterkey();
+						break;
+					case 3:
+						printf( "\n 下は地下５階までと、とんで地下１０階、\n"
+								"\n 噂によるとさらに地下深くに階があるらしい\n"
+								);
+						enterkey();
+						break;
+					case 4:
+						printf( "\n 他の階に行くには、階段をのぼったり\n"
+								"\n 落とし穴に落ちたりするが\n"
+								"\n どの階に行くかはよくわからない\n"
+								);
+						enterkey();
+						break;
+					case 5:
+						printf( "\n 輝く幽霊は役に立つ場所への道を教えてくれる\n"
+								);
+						enterkey();
+						break;
+					case 6:
+						printf( "\n \n"
+								);
+						enterkey();
+						break;
+					case 7:
+						printf( "\n \n"
+								);
+						enterkey();
+						break;
+					case 8:
+						printf( "\n \n"
+								);
+						enterkey();
+						break;
+					case 9:
+						printf( "\n \n"
+								);
+						enterkey();
+						break;
+					case 10:
+						printf( "\n \n"
+								);
+						enterkey();
+						break;
+					default:
+						break;
+				}
+				break;
+			case 2:
+				q = 0;
+				break;
+			default:
+				q = 0;
+				break;
+		}
+	}
 }
 
 int story_12_05(void)
 {
 	printf( "\n 地下５階\n");
 	enterkey();
+	shop();
 }
 
 int story_12_010(void)
@@ -3277,16 +3401,22 @@ void inn(void)
 	int sele;
 	
 	printf( "\n お金：%d\n\n",money);
-	
-	printf( "\n どの宿？\n"
-			"\n 1.安い宿（500円）"
-			"\n 2.普通の宿（2000円）"
-			"\n 3.高級な宿（5000円）"
-			"\n 4.我が家（20000円）\n"
-			);
-	printf( "\n 入力："
-			);
-	scanf( "%d",&sele);
+	if(flag==19){
+		printf( "\n ここは「宿・魔王城店」\n"
+				);
+		enterkey();
+		sele = 5;
+	} else {
+		printf( "\n どの宿？\n"
+				"\n 1.安い宿（500円）"
+				"\n 2.普通の宿（2000円）"
+				"\n 3.高級な宿（5000円）"
+				"\n 4.我が家（20000円）\n"
+				);
+		printf( "\n 入力："
+				);
+		scanf( "%d",&sele);
+	}
 	switch(sele){
 		case 1:
 			if(money<500){
@@ -3372,6 +3502,28 @@ void inn(void)
 					hp_4 += YADO_4;
 				if(nakama_5==1)
 					hp_5 += YADO_4;
+				enterkey();
+			} else {
+			}
+			break;
+		case 5:
+			if(money<10000){
+				printf( "\n お金が足りない\n");
+				enterkey();
+			}else if(money>=10000){
+				printf( "\n 体力が１０００回復した！！\n");
+				hp += YADO_5;
+				money -= 10000;
+				if(nakama_1==1)
+					hp_1 += YADO_5;
+				if(nakama_2==1)
+					hp_2 += YADO_5;
+				if(nakama_3==1)
+					hp_3 += YADO_5;
+				if(nakama_4==1)
+					hp_4 += YADO_5;
+				if(nakama_5==1)
+					hp_5 += YADO_5;
 				enterkey();
 			} else {
 			}
