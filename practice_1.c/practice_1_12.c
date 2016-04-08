@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.7 */
+/* 2016.4.8 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -218,11 +218,15 @@ int main(void)
 				break;
 			case 28:
 				flag = story_12_10();//最上階
+				break;
 			case 29:
-				flag = story_12_010();
+				flag = story_12_010();//地下１０階
 				break;
 			case 30:
 				flag = end(1);
+				break;
+			case 31:
+				flag = end(2);
 				break;
 			default:
 				printf("\n 終了・・・・・・\n");
@@ -2347,7 +2351,13 @@ int story_12_4(void)
 	scanf("%d",&sele);
 	switch(sele){
 		case 1:
-			printf( "\n ");
+			return Story_12_1;
+		case 2:
+			return Story_12_1;
+		case 3:
+			return Story_12_1;
+		default:
+			return Story_12_1;
 	}
 }
 
@@ -2404,7 +2414,7 @@ int story_12_5(void)
 			enterkey();
 			return Story_12_03;
 		default:
-			return story_12_1;
+			return Story_12_1;
 	}
 }
 
@@ -2565,7 +2575,7 @@ int story_12_9(void)
 	printf( "\n その先には大きな階段があった\n");
 	enterkey();
 	
-	return story_12_10;
+	return Story_12_10;
 }
 
 int story_12_10(void)
@@ -2759,9 +2769,31 @@ int story_12_04(void)
 
 int story_12_05(void)
 {
+	int sele;
+	int q;
+	
 	printf( "\n 地下５階\n");
 	enterkey();
-	shop();
+	printf( "\n お店のようだ\n");
+	while(q!=0){
+		printf( "\n 何か買いますか？\n"
+				"\n 1,買う\n"
+				"\n 2.止めておく\n"
+				"\n 入力："
+				);
+		scanf("%d",&sele);
+		switch(sele){
+			case 1:
+				shop();
+				break;
+			case 2:
+				q = 0;
+				break;
+			default:
+				q = 0;
+				break;
+		}
+	}
 }
 
 int story_12_010(void)
@@ -2835,7 +2867,10 @@ int end(int flag_end)
 {
 	switch(flag_end){
 		case 1:
-			printf( "\n end1\n");
+			printf( "\n 魔王エンド\n");
+			break;
+		case 2:
+			printf( "\n 魔神エンド\n");
 			break;
 		default:
 			printf("\n end_default\n");
@@ -3069,6 +3104,72 @@ int battle(int ene)
 			ene_power = 300;
 			ene_money = 30000;
 			break;
+		case 30:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 31:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 32:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 33:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 34:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 35:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 36:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 37:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 38:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 39:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
+		case 40:
+			strncpy(ene_name,"白い龍",sizeof(ene_name));
+			ene_hp = 3000;
+			ene_power = 300;
+			ene_money = 30000;
+			break;
 		default:
 			exit(0);
 	}
@@ -3271,26 +3372,48 @@ void menu(void)
 				do{
 					switch(flag){
 						case 1:
+							printf( "\n \n"
+									);
 							break;
 						case 2:
+							printf( "\n \n"
+									);
 							break;
 						case 3:
+							printf( "\n \n"
+									);
 							break;
 						case 4:
+							printf( "\n \n"
+									);
 							break;
 						case 5:
+							printf( "\n \n"
+									);
 							break;
 						case 6:
+							printf( "\n \n"
+									);
 							break;
 						case 7:
+							printf( "\n \n"
+									);
 							break;
 						case 8:
+							printf( "\n \n"
+									);
 							break;
 						case 9:
+							printf( "\n \n"
+									);
 							break;
 						case 10:
+							printf( "\n \n"
+									);
 							break;
 						case 11:
+							printf( "\n \n"
+									);
 							break;
 						default:
 							break;
@@ -3327,6 +3450,13 @@ void shop(void)
 	int sele_shop;
 	int loop = 1;
 	
+	if(flag==26){
+		printf( "\n お店・魔王城店\n");
+		enterkey();
+	} else {
+		printf( "\n お店\n");
+		enterkey();
+	}
 	while(loop!=0){
 		printf( "\n ==============================\n"
 				"\n 1.パワー（1000円）"
@@ -3653,7 +3783,6 @@ void miniGame_1(void)
 				exit(0);
 		}
 	}
-	return 0;
 }
 
 /* ハイ＆ロー */
