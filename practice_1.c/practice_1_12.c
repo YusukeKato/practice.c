@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.8 */
+/* 2016.4.9 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -2125,7 +2125,9 @@ int story_12_1(void)
 			enterkey();
 			ste();
 			enterkey();
-			return Story_12_6;
+			return Story_12_02;
+		default:
+			return Story_12_1;
 	}
 	/* １階（終）*/
 }
@@ -2174,7 +2176,7 @@ int story_12_2(void)
 						"\n とっておきの道を照らすわ！！\n"
 						);
 				enterkey();
-				return Story_12_099;
+				return Story_12_010;
 			}
 			break;
 		case 2:
@@ -2223,9 +2225,9 @@ int story_12_2(void)
 			scanf("%d",&sele);
 			switch(sele){
 				case 1:
-					return Story_12_8;
+					return Story_12_7;
 				case 2:
-					return Story_12_01;
+					return Story_12_03;
 				default:
 					return Story_12_1;
 			}
@@ -2272,7 +2274,7 @@ int story_12_3(void)
 			printf( "\n 落とし穴に落とされた\n"
 					);
 			enterkey();
-			return Story_12_5;
+			return Story_12_1;
 		case 2:
 			printf( "\n くさいガス「残念だ」\n"
 					);
@@ -2304,7 +2306,7 @@ int story_12_3(void)
 			printf( "\n 落とし穴に落とされた\n"
 					);
 			enterkey();
-			return Story_12_04;
+			return Story_12_03;
 		default:
 			return Story_12_1;
 	}
@@ -2351,11 +2353,11 @@ int story_12_4(void)
 	scanf("%d",&sele);
 	switch(sele){
 		case 1:
-			return Story_12_1;
+			return Story_12_5;
 		case 2:
-			return Story_12_1;
+			return Story_12_3;
 		case 3:
-			return Story_12_1;
+			return Story_12_01;
 		default:
 			return Story_12_1;
 	}
@@ -2395,7 +2397,7 @@ int story_12_5(void)
 			enterkey();
 			printf( "\n 他の階まで流された・・・・・・\n");
 			enterkey();
-			return Story_12_3;
+			return Story_12_2;
 		case 2:
 			printf( "\n 風の魔法を使った！！\n");
 			enterkey();
@@ -2403,7 +2405,7 @@ int story_12_5(void)
 			enterkey();
 			printf( "\n 他の階まで吹き飛ばされた！！\n");
 			enterkey();
-			return Story_12_7;
+			return Story_12_8;
 		case 3:
 			printf( "\n 火の魔法を使った！！\n");
 			enterkey();
@@ -2433,7 +2435,7 @@ int story_12_6(void)
 			);
 	enterkey();
 	printf( "\n 「この階からいける階は\n"
-			"\n ４階、８階、地下２階の３つ」\n"
+			"\n 地下４階、８階、地下２階の３つともう一つ」\n"
 			);
 	enterkey();
 	printf( "\n どの道？\n"
@@ -2454,7 +2456,7 @@ int story_12_6(void)
 		printf( "\n 落とし穴だ！！\n"
 				);
 		enterkey();
-		return Story_12_02;
+		return Story_12_04;
 	} else if(sele_1==1&&sele_2==2){
 		printf( "\n 階段を見つけた\n"
 				);
@@ -2479,7 +2481,7 @@ int story_12_6(void)
 		printf( "\n 落とし穴だ！！\n"
 				);
 		enterkey();
-		return Story_12_02;
+		return Story_12_099;
 	} else {
 		return Story_12_1;
 	}
@@ -2491,6 +2493,8 @@ int story_12_7(void)
 	int q;
 	
 	printf( "\n ７階\n");
+	enterkey();
+	printf( "\n 宿がある\n");
 	enterkey();
 	while(q!=0){
 		printf( "\n 宿に泊まりますか？\n"
@@ -2511,7 +2515,21 @@ int story_12_7(void)
 				break;
 		}
 	}
-	return Story_12_1;
+	printf( "\n ４階か３階のどちらかに行けるようだ\n"
+			"\n どっち？\n"
+			"\n 1.４階\n"
+			"\n 2.３階\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			return Story_12_4;
+		case 2:
+			return Story_12_3;
+		default:
+			return Story_12_1;
+	}
 }
 
 int story_12_8(void)
@@ -2544,11 +2562,11 @@ int story_12_8(void)
 	rand_1 = rand()%3 + 1;
 	switch(rand_1){
 		case 1:
-			return Story_12_1;
+			return Story_12_7;
 		case 2:
-			return Story_12_1;
+			return Story_12_6;
 		case 3:
-			return Story_12_1;
+			return Story_12_01;
 		default:
 			return Story_12_1;
 	}
@@ -2602,33 +2620,76 @@ int story_12_10(void)
 
 int story_12_01(void)
 {
+	int sele;
+	
 	printf( "\n 地下１階\n");
 	enterkey();
 	printf( "\n ハイテンポでノリノリな曲が聴こえる\n"
 			"\n ギターを持ったモヒカン頭の男がいた\n"
 			);
 	enterkey();
-	printf( "\n モヒカン頭「ビートを刻むぜ！！！」\n");
+	printf( "\n モヒカン頭「ビートを刻むぜ！！！」\n"
+			);
 	enterkey();
 	battle(36);
-	printf( "\n モヒカン頭「」\n");
+	printf( "\n モヒカン頭「いい音だったぜ・・・・・・」\n"
+			);
 	enterkey();
-	
+	printf( "\n 目の前に三つの扉がある\n"
+			"\n 1.あれた扉\n"
+			"\n 2.いかれた扉\n"
+			"\n 3.ぶっこわれた扉\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			return Story_12_6;
+		case 2:
+			return Story_12_2;
+		case 3:
+			return Story_12_04;
+		default:
+			return Story_12_1;
+	}
 }
 
 int story_12_02(void)
 {
+	int sele;
+	
 	printf( "\n 地下２階\n");
 	enterkey();
 	printf( "\n そこはキャベツまみれだった\n"
 			);
 	enterkey();
-	printf( "\n キャベツの王「自分から食われにくるとわ」\n"
+	printf( "\n キャベツの王「何やお前、自分から食われにくるとわ」\n"
 			"\n キャベツの王「おいしくいただいてやるわ」\n"
 			);
 	enterkey();
 	battle(36);
-	printf( "\n ");
+	printf( "\n キャベツの王「わしの負けや、いいこと教えてやる」\n"
+			"\n キャベツの王「分かれ道をまっすぐ行けば、店がある」\n"
+			"\n キャベツの王「何か買っていきな]\n"
+			);
+	enterkey();
+	printf( "\n 分かれ道がある\n"
+			"\n 1.左に曲がる\n"
+			"\n 2.まっすぐすすむ\n"
+			"\n 3.右に曲がる\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			return Story_12_4;
+		case 2:
+			return Story_12_05;
+		case 3:
+			return Story_12_6;
+		default:
+			return Story_12_1;
+	}
 }
 
 int story_12_03(void)
@@ -2670,7 +2731,24 @@ int story_12_03(void)
 		default:
 			exit(0);
 	}
-	return Story_12_1;
+	printf( "\n 地下１階、４階、５階のどこかに行けるらしい\n"
+			"\n どこに行く？\n"
+			"\n 1.地下１階\n"
+			"\n 2.４階\n"
+			"\n 3.５階\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 1:
+			return Story_12_01;
+		case 2:
+			return Story_12_4;
+		case 3:
+			return Story_12_5;
+		default:
+			return Story_12_1;
+	}
 }
 
 int story_12_04(void)
@@ -2680,7 +2758,7 @@ int story_12_04(void)
 	
 	printf( "\n 地下４階\n");
 	enterkey();
-	printf( "\n そこは図書館だった\n"
+	printf( "\n そこは魔法の図書館だった\n"
 			"\n 本棚が上にも横にも無限に広がっている\n"
 			);
 	enterkey();
@@ -2774,7 +2852,7 @@ int story_12_05(void)
 	
 	printf( "\n 地下５階\n");
 	enterkey();
-	printf( "\n お店のようだ\n");
+	printf( "\n 「お店・魔王城店」\n");
 	while(q!=0){
 		printf( "\n 何か買いますか？\n"
 				"\n 1,買う\n"
@@ -2794,12 +2872,16 @@ int story_12_05(void)
 				break;
 		}
 	}
+	printf( "\n お店を出た・・・・・・\n");
+	enterkey();
+	return Story_12_2;
 }
 
 int story_12_010(void)
 {
 	int sele_hp;
 	int q;
+	int sele;
 	
 	printf( "\n 地下１０階・研究所\n");
 	enterkey();
@@ -2833,7 +2915,40 @@ int story_12_010(void)
 			exit(0);
 		}
 	}
-	return Story_12_1;
+	printf( "\n Dr.小池「好きな階へ送ってやろう」\n"
+			"\n どこにする？\n"
+			"\n ２階  ３階  ４階  ５階  ６階  ７階  ８階\n"
+			"\n 地下１階  地下２階  地下３階  地下４階  地下５階\n"
+			"\n 入力方法： １階 → '1'   地下１階 → '-1'\n"
+			"\n 入力："
+			);
+	scanf("%d",&sele);
+	switch(sele){
+		case 2:
+			return Story_12_2;
+		case 3:
+			return Story_12_3;
+		case 4:
+			return Story_12_4;
+		case 5:
+			return Story_12_5;
+		case 6:
+			return Story_12_6;
+		case 7:
+			return Story_12_7;
+		case 8:
+			return Story_12_8;
+		case -1:
+			return Story_12_01;
+		case -2:
+			return Story_12_02;
+		case -3:
+			return Story_12_03;
+		case -4:
+			return Story_12_04;
+		case -5:
+			return Story_12_05;
+	}
 }
 
 int story_12_099(void)
@@ -2858,7 +2973,7 @@ int story_12_099(void)
 	enterkey();
 	battle(40);
 	
-	return 30;
+	return end_2;
 }
 
 
