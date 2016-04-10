@@ -1,7 +1,7 @@
 /* practice_1_12.c RPG */
 /* YusukeKato */
 /* 2016.3.18 */
-/* 2016.4.9 */
+/* 2016.4.10 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,24 +26,36 @@ enum yado{
 };
 
 /* ストーリー番号 */
-enum Story12{
-	Story_12_1 = 13,
-	Story_12_2 = 14,
-	Story_12_3 = 15,
-	Story_12_4 = 16,
-	Story_12_5 = 17,
-	Story_12_6 = 18,
-	Story_12_7 = 19,
-	Story_12_8 = 20,
-	Story_12_9 = 21,
-	Story_12_01 = 22,
-	Story_12_02 = 23,
-	Story_12_03 = 24,
-	Story_12_04 = 25,
-	Story_12_05 = 26,
-	Story_12_099 = 27,
-	Story_12_10 = 28,
-	Story_12_010 = 29
+enum Story{
+	Story_1 = 1,
+	Story_2,
+	Story_3,
+	Story_4,
+	Story_5,
+	Story_6,
+	Story_7,
+	Story_8,
+	Story_9,
+	Story_10,
+	Story_11,
+	Story_12,
+	Story_12_1,
+	Story_12_2,
+	Story_12_3,
+	Story_12_4,
+	Story_12_5,
+	Story_12_6,
+	Story_12_7,
+	Story_12_8,
+	Story_12_9,
+	Story_12_10,
+	Story_12_01,
+	Story_12_02,
+	Story_12_03,
+	Story_12_04,
+	Story_12_05,
+	Story_12_010,
+	Story_12_099
 };
 
 /* エンド */
@@ -127,7 +139,7 @@ static int flag_3_1 = 0, flag_3_2 = 0, flag_3_3 = 0, flag_3_4 = 0;
 static int flag_6_2 = 0;
 static int flag_7_1 = 0, flag_7_2 = 0, flag_7_3 = 0, flag_7_4 = 0;
 
-/* メイン関数 */
+/******************** メイン関数（始） ********************/
 int main(void)
 {
 	start();
@@ -135,98 +147,101 @@ int main(void)
 	pro();
 	while(flag!=99){
 		switch(flag){
-			case 1:
+			case Story_1:
 				flag = story_1();//始め、村
 				break;
-			case 2:
+			case Story_2:
 				flag = story_2();//旅人
 				break;
-			case 3:
+			case Story_3:
 				flag = story_3();//森
 				break;
-			case 4:
+			case Story_4:
 				flag = story_4();//洞窟
 				break;
-			case 5:
+			case Story_5:
 				flag = story_5();//泥棒
 				break;
-			case 6:
+			case Story_6:
 				flag = story_6();//街
 				break;
-			case 7:
+			case Story_7:
 				flag = story_7();//魔法使い
 				break;
-			case 8:
+			case Story_8:
 				flag = story_8();//雪国
 				break;
-			case 9:
+			case Story_9:
 				flag = story_9();//海
 				break;
-			case 10:
+			case Story_10:
 				flag = story_10();//龍
 				break;
-			case 11:
+			case Story_11:
 				flag = story_11();//湖
 				break;
-			case 12:
+			case Story_12:
 				flag = story_12();//魔王城
 				break;
-			case 13:
+			case Story_12_1:
 				flag = story_12_1();//1階
 				break;
-			case 14:
+			case Story_12_2:
 				flag = story_12_2();//2階
 				break;
-			case 15:
+			case Story_12_3:
 				flag = story_12_3();//3階
 				break;
-			case 16:
+			case Story_12_4:
 				flag = story_12_4();//4階
 				break;
-			case 17:
+			case Story_12_5:
 				flag = story_12_5();//5階
 				break;
-			case 18:
+			case Story_12_6:
 				flag = story_12_6();//6階
 				break;
-			case 19:
+			case Story_12_7:
 				flag = story_12_7();//7階
 				break;
-			case 20:
+			case Story_12_8:
 				flag = story_12_8();//8階
 				break;
-			case 21:
+			case Story_12_9:
 				flag = story_12_9();//9階
 				break;
-			case 22:
+			case Story_12_10:
 				flag = story_12_01();//地下1階
 				break;
-			case 23:
+			case Story_12_01:
 				flag = story_12_02();//地下2階
 				break;
-			case 24:
+			case Story_12_02:
 				flag = story_12_03();//地下3階
 				break;
-			case 25:
+			case Story_12_03:
 				flag = story_12_04();//地下4階
 				break;
-			case 26:
+			case Story_12_04:
 				flag = story_12_05();//地下5階
 				break;
-			case 27:
+			case Story_12_05:
 				flag = story_12_099();//地下99階
 				break;
-			case 28:
+			case Story_12_010:
 				flag = story_12_10();//最上階
 				break;
-			case 29:
+			case Story_12_099:
 				flag = story_12_010();//地下１０階
 				break;
-			case 30:
+			case end_1:
 				flag = end(1);
 				break;
-			case 31:
+			case end_2:
 				flag = end(2);
+				break;
+			case end_3:
+				flag = end(3);
 				break;
 			default:
 				printf("\n 終了・・・・・・\n");
@@ -235,16 +250,18 @@ int main(void)
 	}
 	return 0;
 }
+/******************** メイン関数（終） ********************/
 
-/* 始め */
+/******************** 始まり（始） ********************/
 void start(void)
 {
 	printf( "\n 始まります・・・・・・\n"
 			"\n enterkey\n");
 	enterkey();
 }
+/******************** 始まり（終） ********************/
 
-/* プロローグ */
+/******************** プロローグ（始） ********************/
 void pro(void)
 {
 	enterkey();
@@ -261,8 +278,9 @@ void pro(void)
 			);
 	enterkey();
 }
+/******************** プロローグ（終） ********************/
 
-/* 物語１ */
+/******************** 物語１（始） ********************/
 int story_1(void)
 {
 	int sele;
@@ -296,18 +314,18 @@ int story_1(void)
 					);
 			enterkey();
 			printf( "\n しかし、牛乳は腐っていた！！\n"
-					"\n %sは５のダメージを受けた！！\n"
+					"\n %sは１０のダメージを受けた！！\n"
 					,name
 					);
-			hp -= 5;
+			hp -= 10;
 			break;
 		case 2:
 			printf( "\n やっぱり、朝ご飯を抜くと力が出ないなぁ。\n"
 					"\n おなかすいた・・・・・・\n"
 					);
 			enterkey();
-			printf("\n %sの力が２下がった・・・・・・\n",name);
-			power -= 2;
+			printf("\n %sの力が５下がった・・・・・・\n",name);
+			power -= 5;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -349,16 +367,16 @@ int story_1(void)
 			printf( "\n とても頑丈そうな鉄の盾、\n"
 					"\n 手になじむ良い盾だ\n"
 					);
-			printf("\n %sの力が３上がった！！\n",name);
-			power += 3;
+			printf("\n %sの力が５上がった！！\n",name);
+			power += 5;
 			break;
 		case 3:
 			printf( "\n 薬草は必需品だ。\n"
 					"\n たくさん持っていこう！！\n"
 					);
 			enterkey();
-			printf("\n %sの体力が１２増えた！！\n",name);
-			hp += 12;
+			printf("\n %sの体力が２０増えた！！\n",name);
+			hp += 20;
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -404,13 +422,13 @@ int story_1(void)
 	enterkey();
 	switch(sele){
 		case 1:
-			battle(1);
+			battle(1);//バトル１（こげたもの）
 			break;
 		case 2:
-			battle(2);
+			battle(2);//バトル２（とうもろこしおばけ）
 			break;
 		case 3:
-			battle(3);
+			battle(3);//バトル３（トマトマト）
 			break;
 		default:
 			printf("\n 終了・・・・・・\n");
@@ -558,6 +576,7 @@ int story_1(void)
 	
 	return story;
 }
+/******************** 物語１（終） ********************/
 
 /* 物語２（旅人） */
 int story_2(void)
@@ -3274,16 +3293,16 @@ int battle(int ene)
 			ene_money = 30000;
 			break;
 		case 39:
-			strncpy(ene_name,"白い龍",sizeof(ene_name));
-			ene_hp = 3000;
-			ene_power = 300;
-			ene_money = 30000;
+			strncpy(ene_name,"最強の魔王",sizeof(ene_name));
+			ene_hp = 1;
+			ene_power = 1;
+			ene_money = 1000;
 			break;
 		case 40:
-			strncpy(ene_name,"白い龍",sizeof(ene_name));
-			ene_hp = 3000;
-			ene_power = 300;
-			ene_money = 30000;
+			strncpy(ene_name,"偉大なる魔神",sizeof(ene_name));
+			ene_hp = 1;
+			ene_power = 1;
+			ene_money = 1000;
 			break;
 		default:
 			exit(0);
