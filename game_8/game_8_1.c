@@ -1,3 +1,5 @@
+/* 2016.4.13 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -64,29 +66,25 @@ int main(void)
 				printf(" %c",array[j][i]);
 			}//for(i)
 		}//for(j)
-		if(flag_1==0){
-			if((y==3&&x==2)||(y==5&&x==5)||(y==8&&x==4)){
-				flag_1 = 1;
-				battle(1);
-			} 
+		if((y==3&&x==2)||(y==5&&x==5)||(y==8&&x==4)){
+			flag_1 = 1;
+			battle(1);
+			x += 1;
+		} 
+		if((y==9&&x==7)||(y==2&&x==9)||(y==1&&x==3)){
+			flag_2 = 1;
+			battle(2);
+			y -= 1;
 		}
-		if(flag_2==0){
-			if((y==9&&x==7)||(y==2&&x==9)||(y==1&&x==3)){
-				flag_2 = 1;
-				battle(2);
-			}
+		if((y==7&&x==1)||(y==4&&x==6)||(y==6&&x==8)){
+			flag_3 = 1;
+			battle(3);
+			y += 1;
 		}
-		if(flag_3==0){
-			if((y==7&&x==1)||(y==4&&x==6)||(y==6&&x==8)){
-				flag_3 = 1;
-				battle(3);
-			} 
-		}
-		if(flag_4==0){
-			if((y==6&&x==3)||(y==3&&x==7)||(y==5&&x==3)){
-				flag_4 = 1;
-				battle(4);	
-			}
+		if((y==6&&x==3)||(y==3&&x==7)||(y==5&&x==3)){
+			flag_4 = 1;
+			battle(4);
+			x += 1;
 		}
 		if(y==8&&x==8){
 			flag_5 = 1;
@@ -154,6 +152,7 @@ void battle(int sele)
 		hp -= ene_power;
 		if(hp<=0){
 			printf("\n 鈴木友崇は死んでしまった・・・・・・\n");
+			printf("\n ゲームオーバー\n");
 			exit(0);
 		}
 		enterkey();
