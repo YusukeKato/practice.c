@@ -8,7 +8,7 @@ static int power = 10;
 static char ene_name[100];
 static int ene_hp = 0, ene_power = 0;
 
-static flag_1 = 0, flag_2 = 0, flag_3 = 0;
+static flag_1 = 0, flag_2 = 0, flag_3 = 0, flag_4 = 0, flag_5 = 0;
 
 void battle(int);
 void enterkey(void);
@@ -71,16 +71,26 @@ int main(void)
 			} 
 		}
 		if(flag_2==0){
-			if((y==6&&x==7)||(y==2&&x==9)||(y==1&&x==3)){
+			if((y==9&&x==7)||(y==2&&x==9)||(y==1&&x==3)){
 				flag_2 = 1;
 				battle(2);
 			}
 		}
 		if(flag_3==0){
-			if((y==7&&x==1)||(y==4&&x==6)||(y==9&&x==8)){
+			if((y==7&&x==1)||(y==4&&x==6)||(y==6&&x==8)){
 				flag_3 = 1;
 				battle(3);
 			} 
+		}
+		if(flag_4==0){
+			if((y==6&&x==3)||(y==3&&x==7)||(y==5&&x==3)){
+				flag_4 = 1;
+				battle(4);	
+			}
+		}
+		if(y==8&&x==8){
+			flag_5 = 1;
+			battle(5);
 		}
 		else {
 		}
@@ -108,6 +118,16 @@ void battle(int sele)
 			ene_hp = 50;
 			ene_power = 5;
 			break;
+		case 4:
+			strncpy(ene_name,"ともたか",sizeof(ene_name));
+			ene_hp = 50;
+			ene_power = 6;
+			break;
+		case 5:
+			strncpy(ene_name,"鈴木の神",sizeof(ene_name));
+			ene_hp = 100;
+			ene_power = 5;
+			break;
 		default:
 			break;
 	}
@@ -119,8 +139,9 @@ void battle(int sele)
 			printf("\n バトルに勝った！！！\n");
 			printf("\n %sをたおした！！！\n",ene_name);
 			enterkey();
-			if(flag_1==1&&flag_2==1&&flag_3==1){
+			if(flag_5==1){
 				system("cls");
+				printf("\n 鈴木友崇の体力：%d \n",hp);
 				printf("\n\n\t！！！ゲームクリア！！！\n\n\n");
 				exit(0);
 			}
