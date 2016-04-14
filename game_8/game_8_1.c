@@ -1,4 +1,5 @@
 /* 2016.4.13 */
+/* 2016.4.14 */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,21 +18,16 @@ void enterkey(void);
 
 int main(void)
 {
-	char array[10][10] = {
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W',
-			'W','W','W','W','W','W','W','W','W','W'
-	};
+	char array[10][10];
 	int x,y;
 	int i,j;
 	char sele;
+	
+	for(j=0;j<10;j++){
+		for(i=0;i<10;i++){
+			array[j][i] = 'W';
+		}//for_i
+	}//for_j
 	
 	x=0;
 	y=0;
